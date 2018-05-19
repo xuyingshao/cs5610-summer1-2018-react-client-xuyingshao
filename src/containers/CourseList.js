@@ -31,7 +31,6 @@ export default class CourseList
     findAllCourses() {
         this.courseService.findAllCourses()
             .then((courses) => {
-                console.log(courses);
                 this.setState({courses: courses});
             })
     }

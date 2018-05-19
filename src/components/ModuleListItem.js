@@ -7,8 +7,7 @@ export default class ModuleListItem
         super(props);
     }
 
-    onDeleteClick() {
-        console.log(this.props.module.id);
+    onDeleteClick = () => {
         this.props.delete(this.props.module.id);
     }
 

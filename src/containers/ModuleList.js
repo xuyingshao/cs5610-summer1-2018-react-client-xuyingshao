@@ -18,13 +18,14 @@ export default class ModuleList
         this.createModule = this.createModule.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
-        this.setModules = this.setModules.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
     }
 
     deleteModule(moduleId) {
         this.moduleService.deleteModule(moduleId)
-            .then(this.findAllModulesForCourse(this.props.courseId));
+            .then(() => {
+                this.findAllModulesForCourse(this.props.courseId)
+            });
     }
 
     setCourseId(courseId) {
@@ -45,7 +46,10 @@ export default class ModuleList
     }
 
     createModule() {
-        this.moduleService.createModule(this.props.courseId, this.state.module);
+        this.moduleService.createModule(this.props.courseId, this.state.module)
+            .then(() => {
+                this.findAllModulesForCourse(this.props.courseId);
+            });
     }
 
     titleChanged(event) {
@@ -53,7 +57,6 @@ export default class ModuleList
     }
 
     findAllModulesForCourse(courseId) {
-        console.log(courseId);
         this.moduleService.findAllModulesForCourse(courseId)
             .then((modules) => {
                 this.setModules(modules);
@@ -64,7 +67,7 @@ export default class ModuleList
         let modules = this.state.modules.map(
             (module) => {
                 return <ModuleListItem module={module} title={module.title} key={module.id}
-                                       delete={this.deleteModule()}/>
+                delete={this.deleteModule}/>
             }
         );
         return modules;
@@ -76,8 +79,7 @@ export default class ModuleList
                 <ul className="list-group">
                     {this.renderListOfModules()}
                 </ul>
-                <input placeholder="title" className="form-control" onChange={this.titleChanged}
-                       value={this.state.module.title}/>
+                <input placeholder="title" className="form-control" onChange={this.titleChanged}/>
                 <button className="btn btn-primary" onClick={this.createModule}>
                     <i className="fa fa-plus"></i>
                 </button>
