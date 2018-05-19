@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const COURSE_API_URL = 'http:localhost:8080/api/course';
+const COURSE_API_URL = 'http://localhost:8080/api/course';
 
 export default class CourseService {
     constructor(singletonToken) {
@@ -8,7 +8,7 @@ export default class CourseService {
         }
     }
 
-    static get instance() {
+    static instance() {
         if(!this[_singleton]) {
             this[_singleton] = new CourseService(_singleton);
         }
@@ -16,14 +16,14 @@ export default class CourseService {
     }
 
     findAllCourses() {
-        return fetch(this.COURSE_API_URL)
+        return fetch(COURSE_API_URL)
             .then(function(response) {
                 return response.json();
             });
     }
 
     createCourse(course) {
-        return fetch(this.COURSE_API_URL, {
+        return fetch(COURSE_API_URL, {
             method: 'post',
             body: JSON.stringify(course),
             headers: {
@@ -36,20 +36,23 @@ export default class CourseService {
     }
 
     deleteCourse(courseId) {
-        return fetch(this.COURSE_API_URL + '/' + courseId, {
+        return fetch(COURSE_API_URL + '/' + courseId, {
             method: 'delete'
         })
+            .then(function(response) {
+                return response;
+            });
     }
 
     findCourseById(courseId) {
-        return fetch(this.COURSE_API_URL + '/' + courseId)
+        return fetch(COURSE_API_URL + '/' + courseId)
             .then(function(response) {
                 return response.json();
             })
     }
 
     updateCourse(course) {
-        return fetch(this.COURSE_API_URL, {
+        return fetch(COURSE_API_URL, {
             method: 'put',
             body: JSON.stringify(course),
             headers: {

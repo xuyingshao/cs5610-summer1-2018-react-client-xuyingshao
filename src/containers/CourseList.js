@@ -1,61 +1,108 @@
 import React from 'react';
 import CourseRow from '../components/CourseRow';
+import CourseService from '../services/CourseService';
 
 export default class CourseList
     extends React.Component {
 
-    constructor(props) {
-        // props
-        super(props);
+    constructor() {
+        super();
+        this.courseService = CourseService.instance();
 
-        // state
         this.state = {
-            courses: [
-                {title: 'CS 1000', id: 1},
-                {title: 'CS 2000', id: 2},
-                {title: 'CS 3000', id: 3},
-            ]
+            course: {title: ''},
+            courses: []
         };
 
         // event handlers
-        this.titleChange = this.titleChange.bind(this);
+        this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
     }
 
-    titleChange(event) {
-        console.log('change');
+    componentDidMount() {
+        this.findAllCourses();
+    }
+
+    // componentWillReceiveProps(newProps) {
+    //
+    // }
+
+    findAllCourses() {
+        this.courseService.findAllCourses()
+            .then((courses) => {
+                console.log(courses);
+                this.setState({courses: courses});
+            })
+    }
+
+    titleChanged(event) {
+        this.setState({course: {title: event.target.value}});
     }
 
     createCourse() {
-        console.log('create');
+        this.courseService.createCourse(this.state.course)
+            .then(() => {
+                this.findAllCourses()
+            });
     }
 
-    deleteCourse() {
-        console.log('delete');
+    // deleteCourse = (id) => {
+    //     console.log('delete' + id);
+    // }
+
+    deleteCourse(courseId) {
+        console.log('delete' + courseId);
     }
 
-    renderListOfCourses() {
+    renderCourseRows() {
         let courses = this.state.courses.map(
-            function(course) {
-                return <CourseRow title={course.title} key={course.id}/>  // FIXME, dynamic course
+            function (course) {
+                return <CourseRow course={course} key={course.id}/>;
             }
         );
         return courses;
+
+        // deleteCourse={this.deleteCourse}
+
+        // let courses = null;
+        //
+        // if (this.state) {
+        //     courses = this.state.courses.map(
+        //         function (course) {
+        //             return <CourseRow title={course.title} key={course.id}/>
+        //         }
+        //     );
+        // }
+        // return courses;
     }
 
     render() {
         return (
-            <div className="row">
+            <div>
                 {/*<div className="col-2">Course Manager</div>*/}
-                <input placeholder="title" className="form-control col-sm-8" onChange={this.titleChange}/>
-                <button className="btn btn-primary col-sm-2" onClick={this.createCourse}>
-                    <i className="fa fa-plus"></i>
-                </button>
-                <ul className="list-group">
-                    {this.renderListOfCourses()}
-                </ul>
+                <div className="row">
+                    <input placeholder="title" className="form-control col-sm-8" onChange={this.titleChanged}/>
+                    <button className="btn btn-primary col-sm-2 float-right" onClick={this.createCourse}>
+                        <i className="fa fa-plus"></i>
+                    </button>
+                </div>
+                <br/>
+                <table className="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Owned By</th>
+                        <th>Last Modified</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.renderCourseRows()}
+                    </tbody>
+                </table>
             </div>
+
         );
     }
 }
