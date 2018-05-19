@@ -10,7 +10,7 @@ export default class CourseList
         this.courseService = CourseService.instance();
 
         this.state = {
-            course: {title: ''},
+            course: {title: '', modified: ''},
             courses: []
         };
 
@@ -24,9 +24,9 @@ export default class CourseList
         this.findAllCourses();
     }
 
-    // componentWillReceiveProps(newProps) {
-    //
-    // }
+    componentWillReceiveProps(newProps) {
+
+    }
 
     findAllCourses() {
         this.courseService.findAllCourses()
@@ -38,49 +38,38 @@ export default class CourseList
 
     titleChanged(event) {
         this.setState({course: {title: event.target.value}});
+        // this.setState({course: {modified: event.target.time}});
     }
 
     createCourse() {
         this.courseService.createCourse(this.state.course)
             .then(() => {
-                this.findAllCourses()
+                this.findAllCourses();
             });
     }
 
-    // deleteCourse = (id) => {
-    //     console.log('delete' + id);
-    // }
-
     deleteCourse(courseId) {
         console.log('delete' + courseId);
+        this.courseService.deleteCourse(courseId)
+            .then(() => {
+                this.findAllCourses();
+            });
     }
 
     renderCourseRows() {
         let courses = this.state.courses.map(
-            function (course) {
-                return <CourseRow course={course} key={course.id}/>;
+            (course) => {
+                return <CourseRow course={course} key={course.id}
+                                  modified={course.modified} delete={this.deleteCourse}/>;
             }
         );
         return courses;
-
-        // deleteCourse={this.deleteCourse}
-
-        // let courses = null;
-        //
-        // if (this.state) {
-        //     courses = this.state.courses.map(
-        //         function (course) {
-        //             return <CourseRow title={course.title} key={course.id}/>
-        //         }
-        //     );
-        // }
-        // return courses;
     }
 
     render() {
+        let course = {title: "hello", id: 123};
         return (
             <div>
-                {/*<div className="col-2">Course Manager</div>*/}
                 <div className="row">
                     <input placeholder="title" className="form-control col-sm-8" onChange={this.titleChanged}/>
                     <button className="btn btn-primary col-sm-2 float-right" onClick={this.createCourse}>

@@ -4,9 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CourseManager from './containers/CourseManager';
 import CourseRow from "./components/CourseRow";
+import CourseEditor from "./containers/CourseEditor";
 
 
-ReactDOM.render(
+ReactDOM.render (
     <CourseManager/>,
     document.getElementById("root")
 );
