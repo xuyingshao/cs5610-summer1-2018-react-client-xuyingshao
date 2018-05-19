@@ -3,7 +3,7 @@ const COURSE_API_URL = 'http://localhost:8080/api/course';
 const MODULE_API_URL = 'http://localhost:8080/api/module';
 
 
-export default class ModuleService {
+export default class ModuleServiceClient {
     constructor(singletonToken) {
         if (_singleton !== singletonToken) {
             throw new Error('Singleton!')
@@ -12,7 +12,7 @@ export default class ModuleService {
 
     static instance() {
         if (!this[_singleton]) {
-            this[_singleton] = new ModuleService(_singleton);
+            this[_singleton] = new ModuleServiceClient(_singleton);
         }
         return this[_singleton];
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseList from "./CourseList";
-import CourseService from "../services/CourseService";
+import CourseServiceClient from "../services/CourseServiceClient";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import CourseEditor from './CourseEditor';
 
@@ -9,7 +9,7 @@ export default class CourseManager
 
     // constructor(props) {
     //     super(props)
-    //     this.courseService = CourseService.instance();
+    //     this.courseService = CourseServiceClient.instance();
     //
     //     // this.titleChanged = this.titleChanged.bind(this);
     //     // this.createCourse = this.createCourse.bind(this);

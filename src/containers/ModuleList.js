@@ -1,13 +1,13 @@
 import React from 'react';
 import ModuleListItem from "../components/ModuleListItem";
-import ModuleService from "../services/ModuleService";
+import ModuleServiceClient from "../services/ModuleServiceClient";
 
 export default class ModuleList
     extends React.Component {
 
     constructor(props) {
         super(props);
-        this.moduleService = ModuleService.instance();
+        this.moduleService = ModuleServiceClient.instance();
 
         this.state = {
             courseId: '',
