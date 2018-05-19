@@ -1,4 +1,5 @@
 import React from 'react';
+import CourseList from "./CourseList";
 
 export default class CourseManager
     extends React.Component {
@@ -6,8 +7,10 @@ export default class CourseManager
     // FIXME, use <CourseList/>
     render() {
         return (
-            <h1>
-                Course Manager
-            </h1>);
+            <div className="container-fluid">
+                <h1>Course Manager</h1>
+                <CourseList/>
+            </div>
+        );
     }
 }
