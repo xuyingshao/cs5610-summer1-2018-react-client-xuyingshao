@@ -45,11 +45,18 @@ export default class LessonTabs
         this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
+    // selectLesson() {
+    //
+    // }
+
+    // onSelect={this.selectLesson}
 
     renderLessons() {
         let lessons = this.state.lessons.map(
             (lesson) => {
-                return <LessonTab lessonTitle={lesson.title} key={lesson.id}/>
+                return <LessonTab lessonTitle={lesson.title} key={lesson.id}
+                courseId={this.state.courseId} moduleId={this.state.moduleId}
+                lesson={lesson}/>
             }
         );
         return lessons;
@@ -68,10 +75,6 @@ export default class LessonTabs
     }
 
     createLesson() {
-        console.log(this.state.courseId);
-        console.log(this.state.moduleId);
-        console.log(this.state.lesson);
-
         this.setState({inputValue: ''});
         this.lessonService.createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
             .then(() => {
@@ -79,23 +82,21 @@ export default class LessonTabs
             });
     }
 
-
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        {this.renderLessons()}
-                    </ul>
-                    <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Add Lesson"
-                               aria-label="Search" onChange={this.titleChanged} value={this.state.inputValue}/>
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.createLesson}>
-                            <i className="fa fa-plus"></i>
-                        </button>
-                    </form>
-                </div>
-            </nav>
+            <div className="row container-fluid">
+                <ul className="nav nav-tabs col-8 bg-light">
+                    {this.renderLessons()}
+                </ul>
+                <form className="form-inline float-right">
+                    <input className="form-control input-sm" placeholder="Add Lesson"
+                           onChange={this.titleChanged} value={this.state.inputValue}/>
+                    <button className="btn btn-outline-secondary" type="submit"
+                            onClick={this.createLesson}>
+                        <i className="fa fa-plus"></i>
+                    </button>
+                </form>
+            </div>
         );
     }
 }

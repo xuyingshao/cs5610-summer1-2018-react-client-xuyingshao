@@ -25,9 +25,8 @@ export default class CourseRow
                 </td>
                 <td></td>
                 <td></td>
-                <td></td>
                 <td>
-                    <button className="btn btn-danger">
+                    <button className="btn btn-outline-danger float-right">
                         <i className="fa fa-times" onClick={this.onDeleteClick}></i>
                     </button>
                 </td>

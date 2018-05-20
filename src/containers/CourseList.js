@@ -58,21 +58,13 @@ export default class CourseList
     }
 
     renderCourseRows() {
-        let courses  = this.state.courses.map(
+        let courses = this.state.courses.map(
             (course) => {
                 return <CourseRow course={course} key={course.id}
                                   modified={course.modified} delete={this.deleteCourse}/>;
             }
-        );;
-
-        // if (this.state.courses) {
-        //     courses = this.state.courses.map(
-        //         (course) => {
-        //             return <CourseRow course={course} key={course.id}
-        //                               modified={course.modified} delete={this.deleteCourse}/>;
-        //         }
-        //     );
-        // }
+        );
+        ;
         return courses;
     }
 
@@ -80,27 +72,32 @@ export default class CourseList
         let course = {title: "hello", id: 123};
         return (
             <div>
-                <div className="row">
-                    <input placeholder="title" className="form-control col-sm-8"
-                           onChange={this.titleChanged} value={this.state.inputValue}/>
-                    <button className="btn btn-primary col-sm-2 float-right" onClick={this.createCourse}>
+                <div className="row container-fluid">
+                    <div className="col-10">
+                        <input id="couseTitle" className="form-control"
+                               placeholder="Enter Course Title"
+                               onChange={this.titleChanged} value={this.state.inputValue}/>
+                    </div>
+                    <button className="btn btn-secondary col-2" onClick={this.createCourse}>
                         <i className="fa fa-plus"></i>
                     </button>
                 </div>
                 <br/>
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Owned By</th>
-                        <th>Last Modified</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderCourseRows()}
-                    </tbody>
-                </table>
+                <div className="container-fluid">
+                    <table className="table table-bordered">
+                        <thead className="thead-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Owned By</th>
+                            <th>Last Modified</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderCourseRows()}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         );

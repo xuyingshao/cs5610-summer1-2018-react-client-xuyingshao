@@ -45,13 +45,17 @@ export default class CourseManager
         return (
             <Router>
                 <div className="container-fluid">
-                    <h1>Course Manager</h1>
+                    <div className="jumbotron">
+                        <h1>Course Manager</h1>
+                    </div>
+                    {/*<CourseList/>*/}
                     <Route path="/courses" component={CourseList}></Route>
                     <Route path="/course/:courseId/edit" component={CourseEditor}></Route>
                     <Route path="/course/:courseId/module/:moduleId/edit" component={CourseEditor}></Route>
-                    {/*/!*<div className="card-deck">*!/*/}
-                        {/*/!*{this.renderAllCourses()}*!/*/}
-                    {/*/!*</div>*!/*/}
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/edit" component={CourseEditor}></Route>
+                    {/*<div className="card-deck">*/}
+                        {/*{this.renderAllCourses()}*/}
+                    {/*</div>*/}
                 </div>
             </Router>
         );

@@ -74,16 +74,6 @@ export default class ModuleList
                 onClick={this.props.onClick}/>
             }
         );
-        // let modules = null;
-        //
-        // if (this.state.modules) {
-        //     modules = this.state.modules.map(
-        //         (module) => {
-        //             return <ModuleListItem module={module} title={module.title} key={module.id}
-        //                                    delete={this.deleteModule}/>
-        //         }
-        //     );
-        // }
         return modules;
     }
 
@@ -93,9 +83,10 @@ export default class ModuleList
                 <ul className="list-group">
                     {this.renderListOfModules()}
                 </ul>
-                <input placeholder="title" className="form-control"
+                <br/>
+                <input placeholder="Add Module" className="form-control"
                        onChange={this.titleChanged} value={this.state.inputValue}/>
-                <button className="btn btn-primary" onClick={this.createModule}>
+                <button className="btn btn-secondary btn-block" onClick={this.createModule}>
                     <i className="fa fa-plus"></i>
                 </button>
             </div>
