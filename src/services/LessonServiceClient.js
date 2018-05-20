@@ -18,11 +18,11 @@ export default class LessonServiceClient {
     }
 
     createLesson(courseId, moduleId, lesson) {
-        let url = COURSE_API_URL + '/' + courseId + '/module' + moduleId + '/lesson';
+        let url = COURSE_API_URL + '/' + courseId + '/module/' + moduleId + '/lesson';
         return fetch(url, {
             method: 'post',
             body: JSON.stringify(lesson),
-            header: {
+            headers: {
                 'content-type': 'application/json'
             }
         })
@@ -55,7 +55,7 @@ export default class LessonServiceClient {
     }
 
     findAllLessonsForModule(courseId, moduleId) {
-        let url = COURSE_API_URL + '/' + courseId + '/module' + moduleId + '/lesson';
+        let url = COURSE_API_URL + '/' + courseId + '/module/' + moduleId + '/lesson';
         return fetch(url)
             .then((response) => {
                 return response.json();
@@ -66,7 +66,7 @@ export default class LessonServiceClient {
         return fetch(LESSON_API_URL + '/' + lessonId, {
             method: 'put',
             body: JSON.stringify(newLesson),
-            header: {
+            headers: {
                 'content-type': 'application/json'
             }
         })

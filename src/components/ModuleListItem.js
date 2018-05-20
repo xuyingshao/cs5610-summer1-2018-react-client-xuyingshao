@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default class ModuleListItem
     extends React.Component {
@@ -14,7 +15,10 @@ export default class ModuleListItem
     render() {
         return (
             <li className="list-group-item">
-                {this.props.title}
+                <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}/edit`}
+                      onClick={this.props.onClick}>
+                    {this.props.title}
+                </Link>
                 <span className="float-right">
                     <i className="fa fa-trash col-sm-2" onClick={this.onDeleteClick}></i>
                 </span>

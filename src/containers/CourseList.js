@@ -25,9 +25,9 @@ export default class CourseList
         this.findAllCourses();
     }
 
-    componentWillReceiveProps(newProps) {
-
-    }
+    // componentWillReceiveProps(newProps) {
+    //
+    // }
 
     findAllCourses() {
         this.courseService.findAllCourses()
@@ -43,7 +43,7 @@ export default class CourseList
     }
 
     createCourse() {
-        this.setState({value: ''});
+        this.setState({inputValue: ''});
         this.courseService.createCourse(this.state.course)
             .then(() => {
                 this.findAllCourses();

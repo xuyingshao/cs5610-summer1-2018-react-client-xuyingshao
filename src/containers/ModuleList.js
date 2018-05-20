@@ -66,11 +66,12 @@ export default class ModuleList
             });
     }
 
-    renderListOfModules() {
+    renderListOfModules() {   // FIXME
         let modules = this.state.modules.map(
             (module) => {
                 return <ModuleListItem module={module} title={module.title} key={module.id}
-                                       delete={this.deleteModule}/>
+                                       courseId={this.state.courseId} delete={this.deleteModule}
+                onClick={this.props.onClick}/>
             }
         );
         // let modules = null;
