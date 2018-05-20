@@ -6,7 +6,7 @@ const MODULE_API_URL = 'http://localhost:8080/api/module';
 export default class ModuleServiceClient {
     constructor(singletonToken) {
         if (_singleton !== singletonToken) {
-            throw new Error('Singleton!')
+            throw new Error('Singleton module service.')
         }
     }
 
@@ -15,13 +15,6 @@ export default class ModuleServiceClient {
             this[_singleton] = new ModuleServiceClient(_singleton);
         }
         return this[_singleton];
-    }
-
-    findAllModulesForCourse(courseId) {
-        return fetch(COURSE_API_URL + '/' + courseId + '/module')
-            .then(function(response) {
-                return response.json();
-            });
     }
 
     createModule(courseId, module) {
@@ -44,5 +37,36 @@ export default class ModuleServiceClient {
             .then(function(response) {
                 return response;
             });
+    }
+
+    findAllModules() {
+        return fetch(MODULE_API_URL)
+            .then((response) => {
+                return response.json();
+            });
+    }
+
+    findModulesById(moduleId) {
+        return fetch(MODULE_API_URL + '/' + moduleId)
+            .then((response) => {
+                return response.json();
+            });
+    }
+
+    findAllModulesForCourse(courseId) {
+        return fetch(COURSE_API_URL + '/' + courseId + '/module')
+            .then(function(response) {
+                return response.json();
+            });
+    }
+
+    updateModule(moduleId, module) {
+        return fetch(MODULE_API_URL + '/' + moduleId, {
+            method: 'put',
+            body: JSON.stringify(module),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
     }
 }

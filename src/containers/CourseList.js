@@ -10,6 +10,7 @@ export default class CourseList
         this.courseService = CourseServiceClient.instance();
 
         this.state = {
+            inputValue: '',
             course: {title: '', modified: ''},
             courses: []
         };
@@ -36,11 +37,13 @@ export default class CourseList
     }
 
     titleChanged(event) {
+        this.setState({inputValue: event.target.value});
         this.setState({course: {title: event.target.value}});
         // this.setState({course: {modified: event.target.time}});
     }
 
     createCourse() {
+        this.setState({value: ''});
         this.courseService.createCourse(this.state.course)
             .then(() => {
                 this.findAllCourses();
@@ -48,7 +51,6 @@ export default class CourseList
     }
 
     deleteCourse(courseId) {
-        console.log('delete' + courseId);
         this.courseService.deleteCourse(courseId)
             .then(() => {
                 this.findAllCourses();
@@ -56,12 +58,21 @@ export default class CourseList
     }
 
     renderCourseRows() {
-        let courses = this.state.courses.map(
+        let courses  = this.state.courses.map(
             (course) => {
                 return <CourseRow course={course} key={course.id}
                                   modified={course.modified} delete={this.deleteCourse}/>;
             }
-        );
+        );;
+
+        // if (this.state.courses) {
+        //     courses = this.state.courses.map(
+        //         (course) => {
+        //             return <CourseRow course={course} key={course.id}
+        //                               modified={course.modified} delete={this.deleteCourse}/>;
+        //         }
+        //     );
+        // }
         return courses;
     }
 
@@ -70,7 +81,8 @@ export default class CourseList
         return (
             <div>
                 <div className="row">
-                    <input placeholder="title" className="form-control col-sm-8" onChange={this.titleChanged}/>
+                    <input placeholder="title" className="form-control col-sm-8"
+                           onChange={this.titleChanged} value={this.state.inputValue}/>
                     <button className="btn btn-primary col-sm-2 float-right" onClick={this.createCourse}>
                         <i className="fa fa-plus"></i>
                     </button>
