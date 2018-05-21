@@ -7,20 +7,22 @@ export default class LessonTab
 
     constructor(props) {
         super(props);
-        this.state = {
-        };
     }
 
     render() {
         return (
             <li className="nav-item">
-                <Link className="nav-link active"
+                <Link className="nav-link"
                       to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/edit`}>
                     {this.props.lessonTitle}
                 </Link>
+                {/*<button>*/}
+                    {/*<i className="fa fa-times"></i>*/}
+                {/*</button>*/}
             </li>
         );
     }
 
     // onClick={this.props.onSelect}
+    // {`nav-link ${this.props.active}`}
 }

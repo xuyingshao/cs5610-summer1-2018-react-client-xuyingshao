@@ -46,7 +46,7 @@ export default class ModuleServiceClient {
             });
     }
 
-    findModulesById(moduleId) {
+    findModuleById(moduleId) {
         return fetch(MODULE_API_URL + '/' + moduleId)
             .then((response) => {
                 return response.json();

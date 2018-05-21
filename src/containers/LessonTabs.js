@@ -1,25 +1,50 @@
 import React from 'react';
 import LessonServiceClient from "../services/LessonServiceClient";
 import LessonTab from "../components/LessonTab";
+import ModuleServiceClient from "../services/ModuleServiceClient";
+import CourseServiceClient from "../services/CourseServiceClient";
 
 export default class LessonTabs
     extends React.Component {
     constructor(props) {
         super(props);
 
+        this.courseService = CourseServiceClient.instance();
+        this.moduleService = ModuleServiceClient.instance();
+        this.lessonService = LessonServiceClient.instance();
+
         this.state = {
             courseId: '',
             moduleId: '',
             lesson: {title: ''},
             lessons: [],
-            inputValue: ''
+            inputValue: '',
+            moduleTitle: '',
+            course: {
+                id: '',
+                modified: ''
+            }
         };
 
-        this.lessonService = LessonServiceClient.instance();
         this.titleChanged = this.titleChanged.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.createLesson = this.createLesson.bind(this);
+        // this.findModuleName = this.findModuleName.bind(this);
+    }
+
+    componentDidMount() {
+        this.setCourseId(this.props.courseId);
+        this.setModuleId(this.props.moduleId);
+        // this.findAllLessonsForModule(this.props.courseId, this.props.moduleId);
+        // this.findModuleName();
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setCourseId(newProps.courseId);
+        this.setModuleId(newProps.moduleId);
+        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
+        // this.findModuleName();
     }
 
     setCourseId(courseId) {
@@ -34,17 +59,6 @@ export default class LessonTabs
         this.setState({lessons: lessons});
     }
 
-    componentDidMount() {
-        this.setCourseId(this.props.courseId);
-        this.setModuleId(this.props.moduleId);
-    }
-
-    componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.courseId);
-        this.setModuleId(newProps.moduleId);
-        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
-    }
-
     // selectLesson() {
     //
     // }
@@ -55,8 +69,8 @@ export default class LessonTabs
         let lessons = this.state.lessons.map(
             (lesson) => {
                 return <LessonTab lessonTitle={lesson.title} key={lesson.id}
-                courseId={this.state.courseId} moduleId={this.state.moduleId}
-                lesson={lesson}/>
+                                  courseId={this.state.courseId} moduleId={this.state.moduleId}
+                                  lesson={lesson}/>
             }
         );
         return lessons;
@@ -72,9 +86,16 @@ export default class LessonTabs
     titleChanged(event) {
         this.setState({lesson: {title: event.target.value}});
         this.setState({inputValue: event.target.value});
+        this.setState({
+            course: {
+                id: this.state.courseId,
+                modified: new Date().toISOString()
+            }
+        });
     }
 
     createLesson() {
+        this.courseService.updateCourse(this.state.course);
         this.setState({inputValue: ''});
         this.lessonService.createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
             .then(() => {
@@ -82,20 +103,40 @@ export default class LessonTabs
             });
     }
 
+    // findModuleName() {
+    //     if (this.state.moduleId === '') {
+    //         return;
+    //     }
+    //     else {
+    //         this.moduleService.findModuleById(this.state.moduleId)
+    //             .then((module) => {
+    //                 this.setState({moduleTitle: module.title});
+    //                 // return (
+    //                 //     <h3>&nbsp;&nbsp;&nbsp;{module.title}</h3>
+    //                 // );
+    //             })
+    //     }
+    // }
+
     render() {
         return (
-            <div className="row container-fluid">
-                <ul className="nav nav-tabs col-8 bg-light">
-                    {this.renderLessons()}
-                </ul>
-                <form className="form-inline float-right">
-                    <input className="form-control input-sm" placeholder="Add Lesson"
-                           onChange={this.titleChanged} value={this.state.inputValue}/>
-                    <button className="btn btn-outline-secondary" type="submit"
-                            onClick={this.createLesson}>
-                        <i className="fa fa-plus"></i>
-                    </button>
-                </form>
+            <div>
+                <h3>&nbsp;&nbsp;&nbsp;Lesson List</h3>
+                {/*<h3>&nbsp;&nbsp;&nbsp;{this.state.moduleTitle}</h3>*/}
+                {/*/!*{this.findModuleName()}*!/*/}
+                <div className="row container-fluid">
+                    <ul className="nav nav-tabs col-8 bg-light">
+                        {this.renderLessons()}
+                    </ul>
+                    <form className="form-inline float-right">
+                        <input className="form-control input-sm" placeholder="Add Lesson"
+                               onChange={this.titleChanged} value={this.state.inputValue}/>
+                        <button className="btn btn-outline-secondary" type="submit"
+                                onClick={this.createLesson}>
+                            <i className="fa fa-plus"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         );
     }

@@ -11,11 +11,10 @@ export default class CourseList
 
         this.state = {
             inputValue: '',
-            course: {title: '', modified: ''},
+            course: {title: '', created: '', modified: ''},
             courses: []
         };
 
-        // event handlers
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
@@ -37,9 +36,15 @@ export default class CourseList
     }
 
     titleChanged(event) {
+        console.log(event.target.value);
         this.setState({inputValue: event.target.value});
-        this.setState({course: {title: event.target.value}});
-        // this.setState({course: {modified: event.target.time}});
+        this.setState({
+            course: {
+                title: event.target.value,
+                created: new Date().toISOString(),
+                modified: new Date().toISOString()
+            }
+        });
     }
 
     createCourse() {
@@ -84,7 +89,7 @@ export default class CourseList
                 </div>
                 <br/>
                 <div className="container-fluid">
-                    <table className="table table-bordered">
+                    <table className="table">
                         <thead className="thead-dark">
                         <tr>
                             <th>Title</th>
