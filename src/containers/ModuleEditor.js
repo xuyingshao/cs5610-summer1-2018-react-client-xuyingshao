@@ -1,43 +1,48 @@
 import React from 'react';
 import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
-import LessonTab from "../components/LessonTab";
-import ModuleEditor from "./ModuleEditor";
 import Route from "react-router-dom/es/Route";
+import LessonEditor from "./LessonEditor";
 
-export default class CourseEditor
+
+export default class ModuleEditor
     extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            courseId: ''
+            courseId: '',
+            moduleId: '',
         };
 
         this.selectCourse = this.selectCourse.bind(this);
+        this.selectModule = this.selectModule.bind(this);
     }
 
     selectCourse(courseId) {
         this.setState({courseId: courseId});
     }
 
+    selectModule(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
     componentDidMount() {
         this.selectCourse(this.props.match.params.courseId);
+        this.selectModule(this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
         this.selectCourse(newProps.match.params.courseId);
+        this.selectModule(newProps.match.params.moduleId);
     }
 
     render() {
         return (
-            <div className="row">
-                <div className="col-3">
-                    <ModuleList courseId={this.state.courseId}/>
-                </div>
-                <div className="col-9">
-                    <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}></Route>
-                </div>
+            <div>
+                <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}/>
+                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                       component={LessonEditor}></Route>
             </div>
         );
     }

@@ -6,6 +6,7 @@ import CourseEditor from './CourseEditor';
 import LessonTabs from './LessonTabs';
 import CourseCard from '../components/CourseCard';
 import ModuleList from './ModuleList';
+import ModuleEditor from './ModuleEditor';
 
 export default class CourseManager
     extends React.Component {
@@ -50,9 +51,7 @@ export default class CourseManager
                     </div>
                     {/*<CourseList/>*/}
                     <Route path="/courses" component={CourseList}></Route>
-                    <Route path="/course/:courseId/edit" component={CourseEditor}></Route>
-                    <Route path="/course/:courseId/module/:moduleId/edit" component={CourseEditor}></Route>
-                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/edit" component={CourseEditor}></Route>
+                    <Route path="/course/:courseId" component={CourseEditor}></Route>
                     {/*<div className="card-deck">*/}
                         {/*{this.renderAllCourses()}*/}
                     {/*</div>*/}
