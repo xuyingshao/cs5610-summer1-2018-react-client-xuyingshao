@@ -50,12 +50,11 @@ export default class CourseRow
                         {this.props.course.title}
                     </Link>
                 </td>
-                <td>me</td>
+                <td>Me</td>
                 <td>{this.setTimeFormat(this.props.course.modified)}</td>
                 <td>
-                    <button className="btn btn-outline-danger">
-                        <i className="fa fa-trash" onClick={this.onDeleteClick}></i>
-                    </button>
+                    <i className="fa fa-pencil col-sm-1"></i>
+                    <i className="fa fa-trash col-sm-1" onClick={this.onDeleteClick}></i>
                 </td>
             </tr>
         );

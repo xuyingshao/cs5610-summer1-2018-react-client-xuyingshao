@@ -9,7 +9,9 @@ export default class ModuleListItem
     }
 
     onDeleteClick = () => {
-        this.props.delete(this.props.module.id);
+        if (window.confirm("Do you want to delete the module?")) {
+            this.props.delete(this.props.module.id);
+        }
     }
 
     render() {
@@ -20,7 +22,9 @@ export default class ModuleListItem
                     {this.props.title}
                 </Link>
                 <span className="float-right">
+                    <Link to={`/course/${this.props.courseId}/edit`}>
                     <i className="fa fa-trash col-sm-2" onClick={this.onDeleteClick}></i>
+                    </Link>
                 </span>
             </li>
         );

@@ -58,6 +58,9 @@ export default class LessonServiceClient {
         let url = COURSE_API_URL + '/' + courseId + '/module/' + moduleId + '/lesson';
         return fetch(url)
             .then((response) => {
+                if (response.status === 409) {
+                    return null;
+                }
                 return response.json();
             });
     }

@@ -60,6 +60,9 @@ export default class CourseServiceClient {
             }
         })
             .then(function(response) {
+                if (response.status === 409) {
+                    return null;
+                }
                 return response.json();
             });
     }

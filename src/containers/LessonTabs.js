@@ -66,13 +66,16 @@ export default class LessonTabs
     // onSelect={this.selectLesson}
 
     renderLessons() {
-        let lessons = this.state.lessons.map(
-            (lesson) => {
-                return <LessonTab lessonTitle={lesson.title} key={lesson.id}
-                                  courseId={this.state.courseId} moduleId={this.state.moduleId}
-                                  lesson={lesson}/>
-            }
-        );
+        let lessons = null;
+        if (this.state.lessons !== null) {
+            lessons = this.state.lessons.map(
+                (lesson) => {
+                    return <LessonTab lessonTitle={lesson.title} key={lesson.id}
+                                      courseId={this.state.courseId} moduleId={this.state.moduleId}
+                                      lesson={lesson}/>
+                }
+            );
+        }
         return lessons;
     }
 
