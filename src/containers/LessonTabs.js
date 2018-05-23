@@ -19,7 +19,6 @@ export default class LessonTabs
             lesson: {title: ''},
             lessons: [],
             inputValue: '',
-            moduleTitle: '',
             course: {
                 id: '',
                 modified: ''
@@ -36,7 +35,6 @@ export default class LessonTabs
     componentDidMount() {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
-        // this.findAllLessonsForModule(this.props.courseId, this.props.moduleId);
         // this.findModuleName();
     }
 
@@ -58,12 +56,6 @@ export default class LessonTabs
     setLessons(lessons) {
         this.setState({lessons: lessons});
     }
-
-    // selectLesson() {
-    //
-    // }
-
-    // onSelect={this.selectLesson}
 
     renderLessons() {
         let lessons = null;
@@ -107,26 +99,17 @@ export default class LessonTabs
     }
 
     // findModuleName() {
-    //     if (this.state.moduleId === '') {
-    //         return;
-    //     }
-    //     else {
-    //         this.moduleService.findModuleById(this.state.moduleId)
-    //             .then((module) => {
-    //                 this.setState({moduleTitle: module.title});
-    //                 // return (
-    //                 //     <h3>&nbsp;&nbsp;&nbsp;{module.title}</h3>
-    //                 // );
-    //             })
-    //     }
+    //     this.moduleService.findModuleById(this.state.moduleId)
+    //         .then((module) => {
+    //             this.setState({moduleTitle: module.title});
+    //         })
     // }
 
     render() {
         return (
             <div>
-                <h3>&nbsp;&nbsp;&nbsp;Lesson List</h3>
-                {/*<h3>&nbsp;&nbsp;&nbsp;{this.state.moduleTitle}</h3>*/}
-                {/*/!*{this.findModuleName()}*!/*/}
+                <h4>&nbsp;&nbsp;&nbsp;Lessons for Module {this.state.moduleId}</h4>
+                {/*{this.findModuleName()}*/}
                 <div className="row container-fluid">
                     <ul className="nav nav-tabs col-8 bg-light">
                         {this.renderLessons()}

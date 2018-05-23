@@ -36,7 +36,6 @@ export default class CourseList
     }
 
     titleChanged(event) {
-        console.log(event.target.value);
         this.setState({inputValue: event.target.value});
         this.setState({
             course: {
@@ -79,7 +78,7 @@ export default class CourseList
             <div>
                 <div className="row container-fluid">
                     <div className="col-10">
-                        <input id="couseTitle" className="form-control"
+                        <input id="courseTitle" className="form-control"
                                placeholder="Enter Course Title"
                                onChange={this.titleChanged} value={this.state.inputValue}/>
                     </div>

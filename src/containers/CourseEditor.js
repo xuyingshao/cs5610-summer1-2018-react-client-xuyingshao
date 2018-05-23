@@ -11,7 +11,7 @@ export default class CourseEditor
         super(props);
 
         this.state = {
-            courseId: ''
+            courseId: '',
         };
 
         this.selectCourse = this.selectCourse.bind(this);

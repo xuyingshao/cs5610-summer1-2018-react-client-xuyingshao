@@ -55,16 +55,16 @@ export default class ModuleList
         this.courseService.updateCourse(this.state.course);
         this.moduleService.deleteModule(moduleId)
             .then(() => {
-                this.findAllModulesForCourse(this.props.courseId)
+                this.findAllModulesForCourse(this.state.courseId)
             });
     }
 
     createModule() {
         this.setState({inputValue: ''});
         this.courseService.updateCourse(this.state.course);
-        this.moduleService.createModule(this.props.courseId, this.state.module)
+        this.moduleService.createModule(this.state.courseId, this.state.module)
             .then(() => {
-                this.findAllModulesForCourse(this.props.courseId);
+                this.findAllModulesForCourse(this.state.courseId);
             });
     }
 
@@ -97,10 +97,14 @@ export default class ModuleList
         return modules;
     }
 
+    // renderCourseName() {
+    //
+    // }
+
     render() {
         return (
             <div className="bg-light">
-                <h3 className="text-center">Module List</h3>
+                <h3 className="text-center">Modules for Course {this.state.courseId}</h3>
                 <ul className="list-group">
                     {this.renderListOfModules()}
                 </ul>

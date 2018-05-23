@@ -16,7 +16,9 @@ export default class CourseRow
     }
 
     onDeleteClick = () => {
-        this.props.delete(this.props.course.id);
+        if (window.confirm("Do you want to delete the module?")) {
+            this.props.delete(this.props.course.id);
+        }
     }
 
     setTimeFormat(date) {
@@ -46,7 +48,7 @@ export default class CourseRow
         return (
             <tr>
                 <td>
-                    <Link to={`/course/${this.props.course.id}/edit`}>
+                    <Link to={`/course/${this.props.course.id}`}>
                         {this.props.course.title}
                     </Link>
                 </td>
