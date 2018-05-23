@@ -12,7 +12,7 @@ export default class LessonEditor
         this.state = {
             courseId: '',
             moduleId: '',
-            lessonId: ''
+            lessonId: '',
         };
 
         this.selectCourse = this.selectCourse.bind(this);
@@ -24,7 +24,7 @@ export default class LessonEditor
         this.setState({courseId: courseId});
     }
 
-    selectModule(moduleId) {
+    selectModule(moduleId, moduleTitle) {
         this.setState({moduleId: moduleId});
     }
 

@@ -29,15 +29,20 @@ export default class CourseRow
         let d = new Date(date);
         let today = new Date();
 
-        if (d.getMonth() === today.getMonth() && d.getDay() === today.getDay()) {
-            let hour = d.getHours();
-            if (hour == 12) {
-                return hour + ":" + d.getMinutes() + ' PM';
+        let month = d.getMonth();
+        let day = d.getDay();
+        let hours = d.getHours();
+        let minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+
+
+        if (month === today.getMonth() && day === today.getDay()) {
+            if (hours == 12) {
+                return hours + ':' + minutes + ' PM';
             }
-            else if (hour > 12) {
-                return (hour - 12) + ':' + d.getMinutes() + ' PM';
+            else if (hours > 12) {
+                return (hours - 12) + ':' + minutes + ' PM';
             }
-            return d.getHours() + ':' + d.getMinutes() + ' AM';
+            return hours + ':' + minutes + ' AM';
         }
         else {
             return new Intl.DateTimeFormat('en-US').format(d);

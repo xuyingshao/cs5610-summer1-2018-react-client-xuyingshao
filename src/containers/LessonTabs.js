@@ -113,18 +113,10 @@ export default class LessonTabs
             });
     }
 
-    // findModuleName() {
-    //     this.moduleService.findModuleById(this.state.moduleId)
-    //         .then((module) => {
-    //             this.setState({moduleTitle: module.title});
-    //         })
-    // }
-
     render() {
         return (
             <div>
-                <h4>&nbsp;&nbsp;&nbsp;Lessons for Module {this.state.moduleId}</h4>
-                {/*{this.findModuleName()}*/}
+                <h4>&nbsp;&nbsp;&nbsp;{this.props.module.title}</h4>
                 <div className="row container-fluid">
                     <ul className="nav nav-tabs col-8 bg-light">
                         {this.renderLessons()}

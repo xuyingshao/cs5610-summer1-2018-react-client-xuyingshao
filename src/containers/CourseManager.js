@@ -15,7 +15,8 @@ export default class CourseManager
         super(props);
 
         this.state = {
-          courses: []
+            courses: [],
+            courseTitle: ''
         };
 
         this.courseService = CourseServiceClient.instance();
@@ -33,7 +34,6 @@ export default class CourseManager
     }
 
     renderAllCourses() {
-        console.log(this.state.courses);
         let courses = this.state.courses.map(
             (course) => {
                 return <CourseCard key={course.id} title={course.title}/>;
@@ -46,14 +46,11 @@ export default class CourseManager
         return (
             <Router>
                 <div className="container-fluid">
-                    <div className="jumbotron">
-                        <h1 className="largeHeader">Course Manager</h1>
-                    </div>
                     {/*<CourseList/>*/}
                     <Route path="/courses" component={CourseList}></Route>
                     <Route path="/course/:courseId" component={CourseEditor}></Route>
                     {/*<div className="card-deck">*/}
-                        {/*{this.renderAllCourses()}*/}
+                    {/*{this.renderAllCourses()}*/}
                     {/*</div>*/}
                 </div>
             </Router>

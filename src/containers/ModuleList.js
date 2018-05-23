@@ -19,26 +19,28 @@ export default class ModuleList
                 modified: ''
             },
             module: {title: ''},
-            modules: []
+            modules: [],
+            currentCourse: ''
         };
 
         this.titleChanged = this.titleChanged.bind(this);
-        this.setCourseId = this.setCourseId.bind(this);
+        this.setCourse = this.setCourse.bind(this);
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
     }
 
     componentDidMount() {
-        this.setCourseId(this.props.courseId);
+        this.setCourse(this.props.courseId, this.props.course);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.courseId);
+        this.setCourse(newProps.courseId, newProps.course);
         this.findAllModulesForCourse(newProps.courseId);
     }
 
-    setCourseId(courseId) {
+    setCourse(courseId, currentCourse) {
         this.setState({courseId: courseId});
+        this.setState({currentCourse: currentCourse});
     }
 
     setModules(modules) {
@@ -97,14 +99,10 @@ export default class ModuleList
         return modules;
     }
 
-    // renderCourseName() {
-    //
-    // }
-
     render() {
         return (
             <div className="bg-light">
-                <h3 className="text-center">Modules for Course {this.state.courseId}</h3>
+                <h3 className="text-center">{this.state.currentCourse.title}</h3>
                 <ul className="list-group">
                     {this.renderListOfModules()}
                 </ul>

@@ -9,11 +9,22 @@
 }
 
 .largeHeader {
-    font-family: "Contrail One";
+    /*font-family: "Contrail One";*/
     font-size: 4.5em;
     font-weight: bold;
     color: black;
     padding-left: 40px;
+}
+
+.smallHeader{
+    /*font-family: "Contrail One";*/
+    font-size: 2.5em;
+    font-weight: bold;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    padding-left: 30px;
+    background-color: #e9ecef;
 }
 
 .jumbotron {
@@ -22,6 +33,16 @@
 
 .fa-times {
     font-size: 14px;
+    color: black;
+}
+
+.fa-trash {
+    color: black;
+}
+
+
+.fa-sign-out {
+    color: black;
 }
 
 

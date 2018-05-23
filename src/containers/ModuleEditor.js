@@ -14,13 +14,14 @@ export default class ModuleEditor
         this.state = {
             courseId: '',
             moduleId: '',
+            currentModule: ''
         };
 
         this.moduleService = ModuleServiceClient.instance();
 
         this.selectCourse = this.selectCourse.bind(this);
         this.selectModule = this.selectModule.bind(this);
-        // this.findModuleName = this.findModuleName.bind(this);
+        this.findModuleById = this.findModuleById.bind(this);
     }
 
     selectCourse(courseId) {
@@ -34,31 +35,28 @@ export default class ModuleEditor
     componentDidMount() {
         this.selectCourse(this.props.match.params.courseId);
         this.selectModule(this.props.match.params.moduleId);
-        // this.findModuleName();
+        this.findModuleById(this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
         this.selectCourse(newProps.match.params.courseId);
         this.selectModule(newProps.match.params.moduleId);
-        // this.findModuleName();
+        this.findModuleById(newProps.match.params.moduleId);
     }
 
-    // findModuleName() {
-    //     if (this.state.moduleId === '') {
-    //         return;
-    //     }
-    //     this.moduleService.findModuleById(this.state.moduleId)
-    //         .then((module) => {
-    //             console.log(module);
-    //             this.setState({moduleTitle: module.title});
-    //         })
-    // }
+    findModuleById(moduleId) {
+        this.moduleService.findModuleById(moduleId)
+            .then((module) => {
+                this.setState({currentModule: module});
+            })
+    }
 
     render() {
         return (
             <div>
                 <LessonTabs courseId={this.state.courseId}
-                            moduleId={this.state.moduleId}/>
+                            moduleId={this.state.moduleId}
+                            module={this.state.currentModule}/>
                 <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
                        component={LessonEditor}></Route>
             </div>

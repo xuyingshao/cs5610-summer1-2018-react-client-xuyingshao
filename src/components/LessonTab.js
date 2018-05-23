@@ -23,14 +23,9 @@ export default class LessonTab
                 <Link className="nav-link"
                       to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                     {this.props.lessonTitle}
+                    <i className="fa fa-times" onClick={this.onDelete}></i>
                 </Link>
-                {/*<button className="btn-outline-secondary">*/}
-                {/*</button>*/}
-                <i className="fa fa-times" onClick={this.onDelete}></i>
             </li>
         );
     }
-
-    // onClick={this.props.onSelect}
-    // {`nav-link ${this.props.active}`}
 }

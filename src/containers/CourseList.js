@@ -48,7 +48,17 @@ export default class CourseList
 
     createCourse() {
         this.setState({inputValue: ''});
-        this.courseService.createCourse(this.state.course)
+        let course = this.state.course;
+
+        if (course.title === '') {
+            course = {
+                title: 'New Title',
+                created: new Date().toISOString(),
+                modified: new Date().toISOString()
+            };
+        }
+
+        this.courseService.createCourse(course)
             .then(() => {
                 this.findAllCourses();
             });
@@ -62,20 +72,27 @@ export default class CourseList
     }
 
     renderCourseRows() {
-        let courses = this.state.courses.map(
-            (course) => {
-                return <CourseRow course={course} key={course.id}
-                                  modified={course.modified} delete={this.deleteCourse}/>;
-            }
-        );
-        ;
-        return courses;
+        let courses = null;
+        if (this.state.courses !== null) {
+            courses = this.state.courses.map(
+                (course) => {
+                    return <CourseRow course={course}
+                                      key={course.id}
+                                      modified={course.modified}
+                                      delete={this.deleteCourse}/>;
+                }
+            );
+            return courses;
+        }
     }
 
     render() {
         let course = {title: "hello", id: 123};
         return (
             <div>
+                <div className="jumbotron">
+                    <h1 className="largeHeader">Course Manager</h1>
+                </div>
                 <div className="row container-fluid">
                     <div className="col-10">
                         <input id="courseTitle" className="form-control"
