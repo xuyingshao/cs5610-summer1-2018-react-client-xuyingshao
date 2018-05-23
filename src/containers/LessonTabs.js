@@ -29,6 +29,7 @@ export default class LessonTabs
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.createLesson = this.createLesson.bind(this);
+        this.deleteLesson = this.deleteLesson.bind(this);
         // this.findModuleName = this.findModuleName.bind(this);
     }
 
@@ -64,11 +65,25 @@ export default class LessonTabs
                 (lesson) => {
                     return <LessonTab lessonTitle={lesson.title} key={lesson.id}
                                       courseId={this.state.courseId} moduleId={this.state.moduleId}
-                                      lesson={lesson}/>
+                                      lesson={lesson} delete={this.deleteLesson}/>
                 }
             );
         }
         return lessons;
+    }
+
+    deleteLesson(lessonId) {
+        this.setState({
+            course: {
+                id: this.state.courseId,
+                modified: new Date().toISOString()
+            }
+        });
+        this.courseService.updateCourse(this.state.course);
+        this.lessonService.deleteLesson(lessonId)
+            .then(() => {
+                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId)
+            });
     }
 
     findAllLessonsForModule(courseId, moduleId) {

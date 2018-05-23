@@ -47,7 +47,7 @@ export default class CourseManager
             <Router>
                 <div className="container-fluid">
                     <div className="jumbotron">
-                        <h1>Course Manager</h1>
+                        <h1 className="largeHeader">Course Manager</h1>
                     </div>
                     {/*<CourseList/>*/}
                     <Route path="/courses" component={CourseList}></Route>

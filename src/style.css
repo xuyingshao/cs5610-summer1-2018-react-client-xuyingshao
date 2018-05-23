@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Contrail One";
-    src: url(../fonts/contrail_one.ttf);
+    src: url(fonts/contrail_one.ttf);
 }
 
 @font-face {
     font-family: "News Cycle";
-    src: url(../fonts/news_cycle.ttf);
+    src: url(fonts/news_cycle.ttf);
 }
 
 .largeHeader {
@@ -13,10 +13,18 @@
     font-size: 4.5em;
     font-weight: bold;
     color: black;
-    padding-top: 30px;
     padding-left: 40px;
 }
 
 .jumbotron {
-    height: 500px;
+    height: 200px;
 }
+
+.fa-times {
+    font-size: 14px;
+}
+
+
+/*.wbdv-header {*/
+    /*font-family: "Contrail One";*/
+/*}*/

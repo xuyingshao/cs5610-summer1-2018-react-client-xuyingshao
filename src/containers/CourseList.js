@@ -91,10 +91,10 @@ export default class CourseList
                     <table className="table">
                         <thead className="thead-dark">
                         <tr>
-                            <th>Title</th>
-                            <th>Owned By</th>
-                            <th>Last Modified</th>
-                            <th>Delete</th>
+                            <th className="text-center">Title</th>
+                            <th className="text-center">Owned By</th>
+                            <th className="text-center">Last Modified</th>
+                            <th className="text-center">Delete</th>
                         </tr>
                         </thead>
                         <tbody>

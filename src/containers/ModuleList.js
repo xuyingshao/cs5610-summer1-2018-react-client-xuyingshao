@@ -20,7 +20,7 @@ export default class ModuleList
             },
             module: {title: ''},
             modules: []
-        }
+        };
 
         this.titleChanged = this.titleChanged.bind(this);
         this.setCourseId = this.setCourseId.bind(this);

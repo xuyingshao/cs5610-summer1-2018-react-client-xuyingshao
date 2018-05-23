@@ -7,18 +7,26 @@ export default class LessonTab
 
     constructor(props) {
         super(props);
+
+        this.onDelete = this.onDelete.bind(this);
+    }
+
+    onDelete = () => {
+        if (window.confirm("Do you want to delete the lesson?")) {
+            this.props.delete(this.props.lesson.id);
+        }
     }
 
     render() {
         return (
             <li className="nav-item">
                 <Link className="nav-link"
-                      to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/edit`}>
+                      to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                     {this.props.lessonTitle}
                 </Link>
-                {/*<button>*/}
-                    {/*<i className="fa fa-times"></i>*/}
+                {/*<button className="btn-outline-secondary">*/}
                 {/*</button>*/}
+                <i className="fa fa-times" onClick={this.onDelete}></i>
             </li>
         );
     }
