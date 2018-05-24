@@ -60,7 +60,7 @@ export default class CourseRow
                 <td className="text-center">Me</td>
                 <td className="text-center">{this.setTimeFormat(this.props.course.modified)}</td>
                 <td className="text-center">
-                    <i className="fa fa-pencil col-sm-1"></i>
+                    {/*<i className="fa fa-pencil col-sm-1"></i>*/}
                     <i className="fa fa-trash col-sm-1" onClick={this.onDeleteClick}></i>
                 </td>
             </tr>
