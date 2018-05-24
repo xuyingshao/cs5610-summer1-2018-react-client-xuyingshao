@@ -33,7 +33,7 @@ export default class CourseRow
         let day = d.getDay();
         let hours = d.getHours();
         let minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
-        
+
         if (month === today.getMonth() && day === today.getDay()) {
             if (hours == 12) {
                 return hours + ':' + minutes + ' PM';

@@ -29,21 +29,18 @@ export default class LessonTabs
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.createLesson = this.createLesson.bind(this);
-        this.deleteLesson = this.deleteLesson.bind(this);
-        // this.findModuleName = this.findModuleName.bind(this);
+        this.deleteLesson = this.deleteLesson.bind(this)
     }
 
     componentDidMount() {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
-        // this.findModuleName();
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
         this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
-        // this.findModuleName();
     }
 
     setCourseId(courseId) {
@@ -63,9 +60,12 @@ export default class LessonTabs
         if (this.state.lessons !== null) {
             lessons = this.state.lessons.map(
                 (lesson) => {
-                    return <LessonTab lessonTitle={lesson.title} key={lesson.id}
-                                      courseId={this.state.courseId} moduleId={this.state.moduleId}
-                                      lesson={lesson} delete={this.deleteLesson}/>
+                    return <LessonTab lessonTitle={lesson.title}
+                                      key={lesson.id}
+                                      courseId={this.state.courseId}
+                                      moduleId={this.state.moduleId}
+                                      lesson={lesson}
+                                      delete={this.deleteLesson}/>
                 }
             );
         }

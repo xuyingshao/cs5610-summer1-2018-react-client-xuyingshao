@@ -74,10 +74,10 @@ export default class ModuleList
         this.setState({inputValue: event.target.value});
         this.setState({module: {title: event.target.value}});
         this.setState({
-                course: {
-                    id: this.state.courseId,
-                    modified: new Date().toISOString()
-                }
+            course: {
+                id: this.state.courseId,
+                modified: new Date().toISOString()
+            }
         });
     }
 
@@ -89,13 +89,19 @@ export default class ModuleList
     }
 
     renderListOfModules() {
-        let modules = this.state.modules.map(
-            (module) => {
-                return <ModuleListItem module={module} title={module.title} key={module.id}
-                                       courseId={this.state.courseId} delete={this.deleteModule}
-                                       onClick={this.props.onClick}/>
-            }
-        );
+        let modules = null;
+        if (this.state.modules !== null) {
+            modules = this.state.modules.map(
+                (module) => {
+                    return <ModuleListItem module={module}
+                                           title={module.title}
+                                           key={module.id}
+                                           courseId={this.state.courseId}
+                                           delete={this.deleteModule}
+                                           onClick={this.props.onClick}/>
+                }
+            );
+        }
         return modules;
     }
 

@@ -46,12 +46,8 @@ export default class CourseManager
         return (
             <Router>
                 <div className="container-fluid">
-                    {/*<CourseList/>*/}
                     <Route path="/courses" component={CourseList}></Route>
                     <Route path="/course/:courseId" component={CourseEditor}></Route>
-                    {/*<div className="card-deck">*/}
-                    {/*{this.renderAllCourses()}*/}
-                    {/*</div>*/}
                 </div>
             </Router>
         );

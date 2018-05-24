@@ -39,7 +39,6 @@ export default class CourseEditor
     componentWillReceiveProps(newProps) {
         this.selectCourse(newProps.match.params.courseId);
         this.findCourseById(newProps.match.params.courseId);
-        // this.changeCourseTitle();
     }
 
     findCourseById(courseId) {
@@ -63,11 +62,8 @@ export default class CourseEditor
 
     changeCourseTitle() {
         this.setState({inputValue: ''});
-        this.setState({course: this.state.newCourse});
-
         this.courseService.updateCourse(this.state.newCourse)
-            // .then(this.findCourseById(this.state.courseId));
-            .then(()=>{
+            .then(() => {
                 this.findCourseById(this.state.courseId);
             });
     }
@@ -81,18 +77,22 @@ export default class CourseEditor
                             <i className="fa fa-arrow-left float-left col-1"></i>
                         </Link>
                         <h2 className="col-4">Course Editor</h2>
-                        <input className="form-control col-6" type="text"
-                               onChange={this.titleChanged} placeholder="Change Course Title"
+                        <input className="form-control col-6"
+                               type="text"
+                               onChange={this.titleChanged}
+                               placeholder="Change Course Title"
                                value={this.state.inputValue}/>
                         <i className="fa fa-pencil col-1" onClick={this.changeCourseTitle}></i>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-3">
-                        <ModuleList courseId={this.state.courseId} course={this.state.course}/>
+                        <ModuleList courseId={this.state.courseId}
+                                    course={this.state.course}/>
                     </div>
                     <div className="col-9">
-                        <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}></Route>
+                        <Route path="/course/:courseId/module/:moduleId"
+                               component={ModuleEditor}></Route>
                     </div>
                 </div>
             </div>

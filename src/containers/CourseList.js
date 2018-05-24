@@ -95,9 +95,11 @@ export default class CourseList
                 </div>
                 <div className="row container-fluid">
                     <div className="col-10">
-                        <input id="courseTitle" className="form-control"
+                        <input id="courseTitle"
+                               className="form-control"
                                placeholder="Enter Course Title"
-                               onChange={this.titleChanged} value={this.state.inputValue}/>
+                               onChange={this.titleChanged}
+                               value={this.state.inputValue}/>
                     </div>
                     <button className="btn btn-secondary col-2" onClick={this.createCourse}>
                         <i className="fa fa-plus"></i>
