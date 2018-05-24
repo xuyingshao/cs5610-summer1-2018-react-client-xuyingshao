@@ -19,12 +19,13 @@ export default class LessonTab
 
     render() {
         return (
-            <li className="nav-item">
+            <li className="nav-item btn-group">
                 <Link className="nav-link"
                       to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                     {this.props.lessonTitle}
-                    <i className="fa fa-times" onClick={this.onDelete}></i>
+
                 </Link>
+                <i className="fa fa-times" onClick={this.onDelete}></i>
             </li>
         );
     }

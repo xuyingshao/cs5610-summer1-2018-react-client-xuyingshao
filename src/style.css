@@ -25,6 +25,7 @@
     padding-bottom: 25px;
     padding-left: 30px;
     background-color: #e9ecef;
+    margin-bottom: 35px;
 }
 
 .jumbotron {
@@ -42,6 +43,10 @@
 
 
 .fa-sign-out {
+    color: black;
+}
+
+.fa-arrow-left {
     color: black;
 }
 
