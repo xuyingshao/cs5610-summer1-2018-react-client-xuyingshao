@@ -48,13 +48,11 @@ export default class ModuleList
     }
 
     deleteModule(moduleId) {
-        this.setState({
-            course: {
-                id: this.state.courseId,
-                modified: new Date().toISOString()
-            }
-        });
-        this.courseService.updateCourse(this.state.course);
+        let course = {
+            id: this.state.courseId,
+            modified: new Date().toISOString()
+        };
+        this.courseService.updateCourse(course);
         this.moduleService.deleteModule(moduleId)
             .then(() => {
                 this.findAllModulesForCourse(this.state.courseId)

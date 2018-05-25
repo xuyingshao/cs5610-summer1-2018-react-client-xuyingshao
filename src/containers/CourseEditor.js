@@ -50,6 +50,7 @@ export default class CourseEditor
 
     titleChanged(event) {
         this.setState({inputValue: event.target.value});
+
         this.setState({
             newCourse: {
                 id: this.state.courseId,
@@ -57,7 +58,15 @@ export default class CourseEditor
                 created: this.state.course.created,
                 modified: new Date().toISOString()
             }
+
+            // FIXME, Object.assign()
+            // newCourse: Object.assign({
+            //     title: event.target.value,
+            //     modified: new Date().toISOString()
+            // }, this.state.course)
         });
+
+        // console.log(this.state.newCourse);
     }
 
     changeCourseTitle() {
@@ -82,7 +91,8 @@ export default class CourseEditor
                                onChange={this.titleChanged}
                                placeholder="Change Course Title"
                                value={this.state.inputValue}/>
-                        <i className="fa fa-pencil col-1" onClick={this.changeCourseTitle}></i>
+                        <i className="fa fa-pencil col-1"
+                           onClick={this.changeCourseTitle}></i>
                     </div>
                 </div>
                 <div className="row">

@@ -73,13 +73,11 @@ export default class LessonTabs
     }
 
     deleteLesson(lessonId) {
-        this.setState({
-            course: {
-                id: this.state.courseId,
-                modified: new Date().toISOString()
-            }
-        });
-        this.courseService.updateCourse(this.state.course);
+        let course = {
+          id: this.state.courseId,
+          modified: new Date().toISOString()
+        };
+        this.courseService.updateCourse(course);
         this.lessonService.deleteLesson(lessonId)
             .then(() => {
                 this.findAllLessonsForModule(this.state.courseId, this.state.moduleId)
