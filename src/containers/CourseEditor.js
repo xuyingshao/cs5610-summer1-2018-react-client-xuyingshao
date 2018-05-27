@@ -52,21 +52,16 @@ export default class CourseEditor
         this.setState({inputValue: event.target.value});
 
         this.setState({
-            newCourse: {
-                id: this.state.courseId,
-                title: event.target.value,
-                created: this.state.course.created,
-                modified: new Date().toISOString()
-            }
-
-            // FIXME, Object.assign()
-            // newCourse: Object.assign({
-            //     title: event.target.value,
-            //     modified: new Date().toISOString()
-            // }, this.state.course)
+            newCourse: Object.assign(
+                {},
+                this.state.course,
+                {
+                    title: event.target.value,
+                    modified: new Date().toISOString()
+                })
         });
 
-        // console.log(this.state.newCourse);
+        console.log(this.state.newCourse);
     }
 
     changeCourseTitle() {
