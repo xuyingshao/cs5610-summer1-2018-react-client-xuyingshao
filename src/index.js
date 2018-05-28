@@ -4,22 +4,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CourseManager from './containers/CourseManager';
 import './style.css';
-import WidgetApp from "./containers/WidgetApp";
-import {createStore} from "redux";
-import Provider from "react-redux/es/components/Provider";
 import WidgetReducer from "./reducers/WidgetReducer";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import WidgetApp from "./containers/WidgetApp";
 
-
-// ReactDOM.render (
-//     <CourseManager/>,
-//     document.getElementById("root")
-// );
-
-let widgetStore = createStore(WidgetReducer);
-
-ReactDOM.render(
-    <Provider store={widgetStore}>
-        <WidgetApp/>
-    </Provider>,
+ReactDOM.render (
+    <CourseManager/>,
     document.getElementById("root")
 );
+
+// let widgetStore = createStore(WidgetReducer);
+//
+// ReactDOM.render(
+//     <Provider store={widgetStore}>
+//         <WidgetApp/>
+//     </Provider>,
+//     document.getElementById('root')
+// );

@@ -4,12 +4,15 @@ import {connect} from "react-redux";
 
 
 const dispatcherToPropsMapper = (dispatch) => ({
+    widgetTextChanged: (widgetId, text) => actions.widgetTextChanged(dispatch, widgetId, text),
     selectWidgetType: (widgetId, widgetType) => actions.selectWidgetType(dispatch, widgetId, widgetType),
     deleteWidget: (widgetId) => actions.deleteWidget(dispatch, widgetId),
     headingSizeChanged: (widgetId, newSize) => actions.headingSizeChanged(dispatch, widgetId, newSize),
-    headingTextChanged: (widgetId, text) => actions.headingTextChanged(dispatch, widgetId, text),
-    paragraphTextChanged: (widgetId, text) => actions.paragraphTextChanged(dispatch, widgetId, text),
-    listTypeChanged: (widgetId, listType) => actions.listTypeChanged(dispatch, widgetId, listType)
+    listTypeChanged: (widgetId, listType) => actions.listTypeChanged(dispatch, widgetId, listType),
+    widgetNameChanged: (widgetId, name) => actions.widgetNameChanged(dispatch, widgetId, name),
+    listItemChanged: (widgetId, listItems) => actions.listItemChanged(dispatch, widgetId, listItems),
+    imageUrlChanged: (widgetId, src) => actions.imageUrlChanged(dispatch, widgetId, src),
+    linkChanged: (widgetId, href) => actions.linkChanged(dispatch, widgetId, href)
 });
 
 const stateToPropsMapper = (state) => ({
@@ -17,13 +20,15 @@ const stateToPropsMapper = (state) => ({
 });
 
 
-const Widget = ({widget, previewMode, dispatch, deleteWidget, selectWidgetType}) => {
+const Widget = ({widget, previewMode, dispatch, deleteWidget, selectWidgetType, widgetUp, widgetDown}) => {
     let selectElement;
     return (
-        <li>
+        <div className="border border-rounded">
             <div hidden={previewMode} className="row">
-                <h2>{widget.id} {widget.widgetType} widget</h2>
-                <button className="btn btn-primary"><i className="fa fa-arrow-up"></i></button>
+                <h2>{widget.displayOrder} {widget.widgetType} widget</h2>
+                <button className="btn btn-primary">
+                    <i className="fa fa-arrow-up"></i>
+                </button>
                 <button className="btn btn-primary"><i className="fa fa-arrow-down"></i></button>
                 <select value={widget.widgetType}
                         onChange={() => selectWidgetType(widget.id, selectElement.value)}
@@ -45,7 +50,7 @@ const Widget = ({widget, previewMode, dispatch, deleteWidget, selectWidgetType})
                 {widget.widgetType === 'Image' && <ImageContainer widget={widget}/>}
                 {widget.widgetType === 'Link' && <LinkContainer widget={widget}/>}
             </div>
-        </li>
+        </div>
     );
 };
 
@@ -54,17 +59,18 @@ const WidgetContainer =
 
 
 // Heading Widget
-const Heading = ({widget, previewMode, headingSizeChanged, headingTextChanged}) => {
+const Heading = ({widget, previewMode, headingSizeChanged, widgetTextChanged, widgetNameChanged}) => {
     let selectElement;
-    let inputElement;
+    let textElement;
+    let nameElement;
+
     return (
         <div>
             <div className="form-group" hidden={previewMode}>
                 <input className="form-control container-fluid"
                        placeholder="Heading Text"
-                       onChange={() => headingTextChanged(widget.id, inputElement.value)}
-                       value={widget.text}
-                       ref={(node) => (inputElement = node)}/>
+                       onChange={() => widgetTextChanged(widget.id, textElement.value)}
+                       ref={(node) => (textElement = node)}/>
                 <br/>
                 <select className="form-control"
                         onChange={() => headingSizeChanged(widget.id, selectElement.value)}
@@ -76,7 +82,9 @@ const Heading = ({widget, previewMode, headingSizeChanged, headingTextChanged}) 
                 </select>
                 <br/>
                 <input className="form-control"
-                       placeholder="Widget name"/>
+                       placeholder="Widget name"
+                       ref={(node) => (nameElement = node)}
+                       onChange={() => widgetNameChanged(widget.id, nameElement.value)}/>
             </div>
             <h3>Preview</h3>
             {widget.size === '1' && <h1>{widget.text}</h1>}
@@ -90,18 +98,22 @@ const HeadingContainer = connect(stateToPropsMapper, dispatcherToPropsMapper)(He
 
 
 // Paragraph Widget
-const Paragraph = ({widget, previewMode, paragraphTextChanged}) => {
+const Paragraph = ({widget, previewMode, widgetTextChanged, widgetNameChanged}) => {
     let textElement;
+    let nameElement;
+
     return (
         <div>
             <div className="form-group" hidden={previewMode}>
             <textarea className="form-control container-fluid"
                       placeholder="Paragraph Text"
                       ref={(node) => (textElement = node)}
-                      onChange={() => paragraphTextChanged(widget.id, textElement.value)}/>
+                      onChange={() => widgetTextChanged(widget.id, textElement.value)}/>
                 <br/>
                 <input className="form-control"
-                       placeholder="Widget name"/>
+                       placeholder="Widget name"
+                       ref={(node) => (nameElement = node)}
+                       onChange={() => widgetNameChanged(widget.id, nameElement.value)}/>
             </div>
             <h3>Preview</h3>
             <div>{widget.text}</div>
@@ -113,13 +125,18 @@ const ParagraphContainer = connect(stateToPropsMapper, dispatcherToPropsMapper)(
 
 
 // List Widget
-const List = ({widget, previewMode, listTypeChanged}) => {
+const List = ({widget, previewMode, listTypeChanged, widgetNameChanged, listItemChanged}) => {
+    let textElement
     let selectElement;
+    let nameElement;
+
     return (
         <div>
             <div className="form-group" hidden={previewMode}>
             <textarea className="form-control container-fluid"
-                      placeholder="Put each item in a separate row"/>
+                      placeholder="Put each item in a separate row"
+                      ref={(node) => (textElement = node)}
+                      onChange={() => listItemChanged(widget.id, textElement.value)}/>
                 <br/>
                 <select className="form-control"
                         ref={(node) => (selectElement = node)}
@@ -129,30 +146,46 @@ const List = ({widget, previewMode, listTypeChanged}) => {
                 </select>
                 <br/>
                 <input className="form-control"
-                       placeholder="Widget name"/>
+                       placeholder="Widget name"
+                       ref={(node) => (nameElement = node)}
+                       onChange={() => widgetNameChanged(widget.id, nameElement.value)}/>
             </div>
             <h3>Preview</h3>
-            {widget.listType}
-            {/*{widget.listType === "ordered" &&}*/}
-            {/*{widget.listType === "unordered" &&}*/}
+            {widget.listType === "ordered" && <ol>{renderListItems(widget.listItems)}</ol>}
+            {widget.listType === "unordered" && <ul>{renderListItems(widget.listItems)}</ul>}
         </div>
+    );
+};
+
+const renderListItems = (listItems) => {
+    let id = 0;
+    return (listItems.split('\n').map(
+            (item) => (<li key={id++}>{item}</li>))
     );
 };
 
 const ListContainer = connect(stateToPropsMapper, dispatcherToPropsMapper)(List);
 
 // Image Widget
-const Image = ({widget, previewMode}) => {
+const Image = ({widget, previewMode, widgetNameChanged, imageUrlChanged}) => {
+    let srcElement;
+    let nameElement;
+
     return (
         <div>
             <div className="form-group" hidden={previewMode}>
                 <input className="form-control container-fluid"
-                       placeholder="http://lorempixel.com/300/150"/>
+                       placeholder="Image URL"
+                       ref={(node) => (srcElement = node)}
+                       onChange={() => imageUrlChanged(widget.id, srcElement.value)}/>
                 <br/>
                 <input className="form-control"
-                       placeholder="Widget name"/>
+                       placeholder="Widget name"
+                       ref={(node) => (nameElement = node)}
+                       onChange={() => widgetNameChanged(widget.id, nameElement.value)}/>
             </div>
             <h3>Preview</h3>
+            <img src={widget.src}/>
         </div>
     );
 };
@@ -161,20 +194,31 @@ const ImageContainer = connect(stateToPropsMapper, dispatcherToPropsMapper)(Imag
 
 
 // Link Widget
-const Link = ({widget, previewMode}) => {
+const Link = ({widget, previewMode, widgetNameChanged, linkChanged, widgetTextChanged}) => {
+    let linkElement;
+    let linkTextElement;
+    let nameElement;
+
     return (
         <div>
             <div className="form-group" hidden={previewMode}>
                 <input className="form-control container-fluid"
-                       placeholder="Link URL"/>
+                       placeholder="Link URL"
+                       ref={(node) => (linkElement = node)}
+                       onChange={() => linkChanged(widget.id, linkElement.value)}/>
                 <br/>
                 <input className="form-control container-fluid"
-                       placeholder="Link Text"/>
+                       placeholder="Link Text"
+                       ref={(node) => (linkTextElement = node)}
+                       onChange={() => widgetTextChanged(widget.id, linkTextElement.value)}/>
                 <br/>
                 <input className="form-control"
-                       placeholder="Widget name"/>
+                       placeholder="Widget name"
+                       ref={(node) => (nameElement = node)}
+                       onChange={() => widgetNameChanged(widget.id, nameElement.value)}/>
             </div>
             <h3>Preview</h3>
+            <a href={widget.href}>{widget.text}</a>
         </div>
     );
 }

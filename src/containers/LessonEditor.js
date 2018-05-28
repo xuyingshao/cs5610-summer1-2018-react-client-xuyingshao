@@ -2,7 +2,12 @@ import React from 'react';
 import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
-
+import WidgetApp from "./WidgetApp";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+import WidgetReducer from "../reducers/WidgetReducer";
+import ModuleEditor from "./ModuleEditor";
+import {Route} from "react-router-dom";
 
 export default class LessonEditor
     extends React.Component {
@@ -45,10 +50,19 @@ export default class LessonEditor
     }
 
     render() {
+        let widgetStore = createStore(WidgetReducer);
+
+        console.log(this.state.courseId);
+        console.log(this.state.moduleId);
+        console.log(this.state.lessonId);
+
         return (
-            <TopicPills courseId={this.state.courseId}
-                        moduleId={this.state.moduleId}
-                        lessonId={this.state.lessonId}/>
+            <Provider store={widgetStore}>
+                <WidgetApp courseId={this.state.courseId}
+                           moduleId={this.state.moduleId}
+                           lessonId={this.state.lessonId}/>
+            </Provider>
         );
-    }
+    };
 }
+

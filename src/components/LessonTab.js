@@ -23,7 +23,6 @@ export default class LessonTab
                 <Link className="nav-link"
                       to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                     {this.props.lessonTitle}
-
                 </Link>
                 <i className="fa fa-times" onClick={this.onDelete}></i>
             </li>

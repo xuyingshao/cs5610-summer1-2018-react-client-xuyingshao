@@ -14,7 +14,7 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
             return {
                 widgets: [
                     ...state.widgets,
-                    {id: idAutoIncrement++, widgetType: 'Heading'}
+                    {displayOrder: ++state.widgets.length, widgetType: 'Heading'}
                 ]
             };
         case constants.FIND_ALL_WIDGETS:
@@ -22,6 +22,10 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
             // newState.widgets = action.widgets;
             // newState.previewMode = action.previewMode;
             // return newState;
+            return {
+                widgets: action.widgets
+            }
+        case constants.FIND_ALL_WIDGETS_FOR_LESSON:
             return {
                 widgets: action.widgets
             }
@@ -34,6 +38,8 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
                 }
             });
             return state;
+        // case constants.SAVE_ALL_WIDGETS_FOR_LESSON:
+
         case constants.SELECT_WIDGET_TYPE:
             newState = {
                 widgets: state.widgets.filter((widget) => {
@@ -53,34 +59,61 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
                     return Object.assign({}, widget);
                 })
             };
-        case constants.CHANGE_HEADING_TEXT:
-            return {
-                widgets: state.widgets.map((widget) => {
-                    if (widget.id === action.id) {
-                        widget.text = action.text;
-                    }
-                    return Object.assign({}, widget);
-                })
-            };
         case constants.PREVIEW:
             newState = Object.assign({}, state);
             newState.previewMode = !state.previewMode;
             console.log(newState.previewMode);
             return newState;
-        case constants.CHANGE_PARAGRAPH_TEXT:
-            return {
-                widgets: state.widgets.map((widget) => {
-                    if (widget.id === action.id) {
-                        widget.text = action.text;
-                    }
-                    return Object.assign({}, widget);
-                })
-            };
         case constants.CHANGE_LIST_TYPE:
             return {
                 widgets: state.widgets.map((widget) => {
                     if (widget.id === action.id) {
                         widget.listType = action.listType;
+                    }
+                    return Object.assign({}, widget);
+                })
+            };
+        case constants.CHANGE_WIDGET_NAME:
+            return {
+                widgets: state.widgets.map((widget) => {
+                    if (widget.id === action.id) {
+                        widget.name = action.name;
+                    }
+                    return Object.assign({}, widget);
+                })
+            };
+        case constants.CHANGE_LIST_ITEMS:
+            return {
+                widgets: state.widgets.map((widget) => {
+                    if (widget.id === action.id) {
+                        widget.listItems = action.listItems;
+                    }
+                    return Object.assign({}, widget);
+                })
+            };
+        case constants.CHANGE_IMAGE_SRC:
+            return {
+                widgets: state.widgets.map((widget) => {
+                    if (widget.id === action.id) {
+                        widget.src = action.src;
+                    }
+                    return Object.assign({}, widget);
+                })
+            };
+        case constants.CHANGE_LINK:
+            return {
+                widgets: state.widgets.map((widget) => {
+                    if (widget.id === action.id) {
+                        widget.href = action.href;
+                    }
+                    return Object.assign({}, widget);
+                })
+            };
+        case constants.CHANGE_WIDGET_TEXT:
+            return {
+                widgets: state.widgets.map((widget) => {
+                    if (widget.id === action.id) {
+                        widget.text = action.text;
                     }
                     return Object.assign({}, widget);
                 })

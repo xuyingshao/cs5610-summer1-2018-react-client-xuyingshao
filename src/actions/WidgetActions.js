@@ -1,11 +1,24 @@
 import * as constants from "../constants/WidgetConstants";
 
+const COURSE_API_URL = 'http://localhost:8080/api/course';
+
+// export const findAllWidgetsForLesson = (dispatch, courseId, moduleId, lessonId) => {
+//         fetch(COURSE_API_URL + '/' + courseId + '/module/' + moduleId + '/lesson/' + lessonId)
+//             .then((response) => (response.json))
+//             .then((widgets) => (
+//                 dispatch({
+//                     type: constants.FIND_ALL_WIDGETS_FOR_LESSON,
+//                     widgets: widgets
+//                 })
+//             ))
+// };
+
 export const findAllWidgets = (dispatch) => (
     fetch('http://localhost:8080/api/widget')
         .then((response) => (response.json()))
         .then((widgets) => (
             dispatch({
-                type:constants.FIND_ALL_WIDGETS,
+                type: constants.FIND_ALL_WIDGETS,
                 widgets: widgets
             })
         ))
@@ -47,25 +60,9 @@ export const selectWidgetType = (dispatch, widgetId, widgetType) => {
     });
 };
 
-export const headingTextChanged = (dispatch, widgetId, newText) => {
-    dispatch({
-        type: constants.CHANGE_HEADING_TEXT,
-        id: widgetId,
-        text: newText
-    });
-};
-
 export const switchPreview = (dispatch) => {
     dispatch({
         type: constants.PREVIEW
-    });
-};
-
-export const paragraphTextChanged = (dispatch, widgetId, text) => {
-    dispatch({
-        type: constants.CHANGE_PARAGRAPH_TEXT,
-        id: widgetId,
-        text: text
     });
 };
 
@@ -75,4 +72,50 @@ export const listTypeChanged = (dispatch, widgetId, listType) => {
         id: widgetId,
         listType: listType
     });
+};
+
+export const widgetNameChanged = (dispatch, widgetId, name) => {
+    dispatch({
+        type: constants.CHANGE_WIDGET_NAME,
+        id: widgetId,
+        name: name
+    });
+};
+
+export const listItemChanged = (dispatch, widgetId, listItems) => {
+    dispatch({
+        type: constants.CHANGE_LIST_ITEMS,
+        id: widgetId,
+        listItems: listItems
+    });
+};
+
+export const imageUrlChanged = (dispatch, widgetId, src) => {
+    dispatch({
+        type: constants.CHANGE_IMAGE_SRC,
+        id: widgetId,
+        src: src
+    });
+};
+
+export const linkChanged = (dispatch, widgetId, href) => {
+    dispatch({
+        type: constants.CHANGE_LINK,
+        id: widgetId,
+        href: href
+    });
+};
+
+export const widgetTextChanged = (dispatch, widgetId, text) => {
+    dispatch({
+        type: constants.CHANGE_WIDGET_TEXT,
+        id: widgetId,
+        text: text
+    });
+};
+
+export const saveAllWidgetsForLesson = (dispatch) => {
+    dispatch({
+        type: constants.SAVE_ALL_WIDGETS_FOR_LESSON,
+    })
 }
