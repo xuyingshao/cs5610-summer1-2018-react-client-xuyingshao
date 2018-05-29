@@ -29,7 +29,7 @@ export default class LessonTabs
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.createLesson = this.createLesson.bind(this);
-        this.deleteLesson = this.deleteLesson.bind(this)
+        this.deleteLesson = this.deleteLesson.bind(this);
     }
 
     componentDidMount() {
@@ -114,7 +114,7 @@ export default class LessonTabs
     render() {
         return (
             <div>
-                <h4>&nbsp;&nbsp;&nbsp;{this.props.module.title}</h4>
+                <h3>&nbsp;&nbsp;&nbsp;{this.props.module.title}</h3>
                 <div className="row container-fluid">
                     <ul className="nav nav-tabs col-8 bg-light">
                         {this.renderLessons()}

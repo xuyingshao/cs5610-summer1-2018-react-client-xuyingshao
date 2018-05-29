@@ -1,17 +1,17 @@
 import * as constants from "../constants/WidgetConstants";
 
-const COURSE_API_URL = 'http://localhost:8080/api/course';
+const LESSON_API_URL = 'http://localhost:8080/api/lesson';
 
-// export const findAllWidgetsForLesson = (dispatch, courseId, moduleId, lessonId) => {
-//         fetch(COURSE_API_URL + '/' + courseId + '/module/' + moduleId + '/lesson/' + lessonId)
-//             .then((response) => (response.json))
-//             .then((widgets) => (
-//                 dispatch({
-//                     type: constants.FIND_ALL_WIDGETS_FOR_LESSON,
-//                     widgets: widgets
-//                 })
-//             ))
-// };
+export const findAllWidgetsForLesson = (dispatch, lessonId) => {
+        fetch(LESSON_API_URL + '/' + lessonId)
+            .then((response) => (response.json))
+            .then((widgets) => (
+                dispatch({
+                    type: constants.FIND_ALL_WIDGETS_FOR_LESSON,
+                    widgets: widgets
+                })
+            ))
+};
 
 export const findAllWidgets = (dispatch) => (
     fetch('http://localhost:8080/api/widget')
@@ -40,7 +40,7 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => {
     dispatch(
         {
             type: constants.CHANGE_HEADING_SIZE,
-            id: widgetId,
+            displayOrder: widgetId,
             size: newSize
         });
 };
@@ -48,14 +48,14 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => {
 export const deleteWidget = (dispatch, widgetId) => {
     dispatch({
         type: constants.DELETE_WIDGET,
-        id: widgetId
+        displayOrder: widgetId
     });
 };
 
 export const selectWidgetType = (dispatch, widgetId, widgetType) => {
     dispatch({
         type: constants.SELECT_WIDGET_TYPE,
-        id: widgetId,
+        displayOrder: widgetId,
         widgetType: widgetType
     });
 };
@@ -69,7 +69,7 @@ export const switchPreview = (dispatch) => {
 export const listTypeChanged = (dispatch, widgetId, listType) => {
     dispatch({
         type: constants.CHANGE_LIST_TYPE,
-        id: widgetId,
+        displayOrder: widgetId,
         listType: listType
     });
 };
@@ -77,7 +77,7 @@ export const listTypeChanged = (dispatch, widgetId, listType) => {
 export const widgetNameChanged = (dispatch, widgetId, name) => {
     dispatch({
         type: constants.CHANGE_WIDGET_NAME,
-        id: widgetId,
+        displayOrder: widgetId,
         name: name
     });
 };
@@ -85,7 +85,7 @@ export const widgetNameChanged = (dispatch, widgetId, name) => {
 export const listItemChanged = (dispatch, widgetId, listItems) => {
     dispatch({
         type: constants.CHANGE_LIST_ITEMS,
-        id: widgetId,
+        displayOrder: widgetId,
         listItems: listItems
     });
 };
@@ -93,7 +93,7 @@ export const listItemChanged = (dispatch, widgetId, listItems) => {
 export const imageUrlChanged = (dispatch, widgetId, src) => {
     dispatch({
         type: constants.CHANGE_IMAGE_SRC,
-        id: widgetId,
+        displayOrder: widgetId,
         src: src
     });
 };
@@ -101,7 +101,7 @@ export const imageUrlChanged = (dispatch, widgetId, src) => {
 export const linkChanged = (dispatch, widgetId, href) => {
     dispatch({
         type: constants.CHANGE_LINK,
-        id: widgetId,
+        displayOrder: widgetId,
         href: href
     });
 };
@@ -109,7 +109,7 @@ export const linkChanged = (dispatch, widgetId, href) => {
 export const widgetTextChanged = (dispatch, widgetId, text) => {
     dispatch({
         type: constants.CHANGE_WIDGET_TEXT,
-        id: widgetId,
+        displayOrder: widgetId,
         text: text
     });
 };
@@ -118,4 +118,21 @@ export const saveAllWidgetsForLesson = (dispatch) => {
     dispatch({
         type: constants.SAVE_ALL_WIDGETS_FOR_LESSON,
     })
-}
+};
+
+export const widgetUp = (dispatch, widgetId) => {
+    dispatch({
+        type: constants.WIDGET_UP,
+        displayOrder: widgetId
+    });
+};
+
+
+export const widgetDown = (dispatch, widgetId) => {
+    dispatch({
+        type: constants.WIDGET_DOWN,
+        displayOrder: widgetId
+    });
+};
+
+

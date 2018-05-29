@@ -8,45 +8,75 @@ class WidgetList extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props);
+        this.state = {
+            courseId: '',
+            moduleId: '',
+            lessonId: ''
+        };
 
-        console.log(this.props.courseId);
-        console.log(this.props.moduleId);
-        console.log(this.props.lessonId);
+        // console.log(this.props);
+        //
+        // console.log(this.props.courseId);
+        // console.log(this.props.moduleId);
+        // console.log(this.props.lessonId);
 
-        this.props.findAllWidgets();
-
+        // this.props.findAllWidgets();
         // this.props.findAllWidgetsForLesson(582, 742, 642);
     }
 
-    // componentDidMount() {
-    //
-    // }
-    //
-    // componentWillReceiveNewProps(newProps) {
-    //
-    // }
+    componentDidMount() {
+        this.setState({courseId: this.props.courseId});
+        this.setState({moduleId: this.props.moduleId});
+        this.setState({lessonId: this.props.lessonId});
+    }
+
+    componentWillReceiveNewProps(newProps) {
+        this.setState({courseId: newProps.courseId});
+        this.setState({moduleId: newProps.moduleId});
+        this.setState({lessonId: newProps.lessonId});
+        this.props.findAllWidgetsForLesson(this.state.lessonId);
+    }
 
     render() {
         return (
-            <div>
-                <h1>Widget List {this.props.widgets.length}</h1>
-                <div>
-                    <button hidden={this.props.previewMode}
+            <div className="col-11">
+                <br/>
+                <div className="text-right">
+                    <button className="btn btn-primary"
+                            hidden={this.props.previewMode}
                             onClick={this.props.save}>Save
                     </button>
-                    <button onClick={this.props.switchPreview}>Preview</button>
+                    {/*<button className="btn btn-primary"*/}
+                    {/*onClick={this.props.switchPreview}>Preview*/}
+                    {/*</button>*/}
+
+                    {/*<button type="button" className="btn btn-primary" data-toggle="button" aria-pressed="false"*/}
+                    {/*autocomplete="off">*/}
+                    {/*Preview*/}
+                    {/*</button>*/}
+
+                    <button type="button" className="btn btn-toggle btn-primary"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            autoComplete="off">Preview
+                        <div className="handle"></div>
+                    </button>
                 </div>
+                <br/>
                 <div>
-                    {this.props.widgets !== null && this.props.widgets.map((widget) =>
-                        (<WidgetContainer key={widget.id}
+                    {this.props.widgets !== null &&
+                    this.props.widgets.sort((a, b) => (a.displayOrder - b.displayOrder)).map((widget) =>
+                        (<WidgetContainer key={widget.displayOrder}
                                           widget={widget}
                                           previewMode={this.props.previewMode}
                                           widgetLength={this.props.widgets.length}/>))}
                 </div>
-                <button onClick={this.props.addWidget}>
-                    <i className="fa fa-plus"></i>
-                </button>
+                <br/>
+                <div className="text-right">
+                    <button className="btn btn-danger" onClick={this.props.addWidget}>
+                        <i className="fa fa-plus-circle"></i>
+                    </button>
+                </div>
             </div>
         );
     }
@@ -59,8 +89,7 @@ const stateToPropsMapper = (state) => ({
 
 const dispatcherToPropsMapper = (dispatch) => ({
     findAllWidgets: () => actions.findAllWidgets(dispatch),
-    // findAllWidgetsForLesson: (courseId, moduleId, lessonId) =>
-    //     actions.findAllWidgetsForLesson(dispatch, courseId, moduleId, lessonId),
+    findAllWidgetsForLesson: (lessonId) => actions.findAllWidgetsForLesson(dispatch, lessonId),
     addWidget: () => actions.addWidget(dispatch),
     saveAllWidgetsForLesson: () => actions.saveAllWidgetsForLesson(dispatch),
     save: () => actions.save(dispatch),
