@@ -52,10 +52,6 @@ export default class LessonEditor
     render() {
         let widgetStore = createStore(WidgetReducer);
 
-        // console.log(this.state.courseId);
-        // console.log(this.state.moduleId);
-        // console.log(this.state.lessonId);
-
         return (
             <Provider store={widgetStore}>
                 <WidgetApp courseId={this.state.courseId}
