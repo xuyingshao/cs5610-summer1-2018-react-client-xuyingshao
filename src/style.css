@@ -86,11 +86,11 @@
 }
 
 input:checked + .slider {
-    background-color: #007bff;
+    background-color: #6c757d;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #007bff;
+    box-shadow: 0 0 1px #6c757d;
 }
 
 input:checked + .slider:before {
@@ -108,10 +108,10 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-.btn {
-    margin-left: 10px;
-    margin-right: 10px;
-}
+/*.btn {*/
+    /*margin-left: 5px;*/
+    /*margin-right: 5px;*/
+/*}*/
 /*.wbdv-header {*/
     /*font-family: "Contrail One";*/
 /*}*/

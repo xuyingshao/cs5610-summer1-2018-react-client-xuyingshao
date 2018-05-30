@@ -129,7 +129,6 @@ export const widgetUp = (dispatch, widgetId) => {
     });
 };
 
-
 export const widgetDown = (dispatch, widgetId) => {
     dispatch({
         type: constants.WIDGET_DOWN,

@@ -11,8 +11,6 @@ class WidgetList extends React.Component {
     constructor(props) {
         super(props);
 
-        // console.log('in widget list');
-        // console.log(this.props.lessonId);
         this.props.findAllWidgetsForLesson(this.props.lessonId);
     }
 
@@ -30,25 +28,25 @@ class WidgetList extends React.Component {
     }
 
     render() {
-        // console.log('in widget list render');
-        // console.log(this.props.lessonId);
-
         return (
             <div className="col-11">
                 <br/>
-                <div className="text-right">
-                    <button className="btn btn-primary"
-                            hidden={this.props.previewMode}
-                            onClick={() => this.props.saveAllWidgetsForLesson(this.props.lessonId)}>Save
-                    </button>
-                    <div className="btn-group">
-                        <h5>Preview</h5>
-                        <label className="switch" id="preview-switch">
-                            <input type="checkbox" onClick={this.props.switchPreview}/>
-                            <span className="slider round"></span>
-                        </label>
+
+                    <h3 className="text-left">Lesson title: {this.props.lesson.title}</h3>
+                    <div className="text-right">
+                        <button className="btn btn-secondary"
+                                hidden={this.props.previewMode}
+                                onClick={() => this.props.saveAllWidgetsForLesson(this.props.lessonId)}>Save
+                        </button>
+                        <div className="btn-group">
+                            <h5>Preview</h5>
+                            <label className="switch" id="preview-switch">
+                                <input type="checkbox" onClick={this.props.switchPreview}/>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
                     </div>
-                </div>
+
                 <br/>
                 <div>
                     {this.props.widgets !== null &&
@@ -60,7 +58,7 @@ class WidgetList extends React.Component {
                 </div>
                 <br/>
                 <div className="text-right">
-                    <button className="btn btn-danger" onClick={this.props.addWidget}>
+                    <button className="btn btn-secondary" onClick={this.props.addWidget}>
                         <i className="fa fa-plus-circle"></i>
                     </button>
                 </div>
@@ -70,17 +68,18 @@ class WidgetList extends React.Component {
 }
 
 const stateToPropsMapper = (state, ownProps) => {
-    return  {
+    return {
         widgets: state.widgets,
         previewMode: state.previewMode,
         courseId: ownProps.courseId,
         moduleId: ownProps.moduleId,
-        lessonId: ownProps.lessonId
+        lessonId: ownProps.lessonId,
+        lesson: ownProps.lesson
     };
 };
 
 const dispatcherToPropsMapper = (dispatch) => ({
-    findAllWidgets: () => actions.findAllWidgets(dispatch),
+    // findAllWidgets: () => actions.findAllWidgets(dispatch),
     findAllWidgetsForLesson: (lessonId) => actions.findAllWidgetsForLesson(dispatch, lessonId),
     addWidget: () => actions.addWidget(dispatch),
     saveAllWidgetsForLesson: (lessonId) => actions.saveAllWidgetsForLesson(dispatch, lessonId),

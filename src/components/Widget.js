@@ -26,31 +26,23 @@ const Widget = ({widget, previewMode, dispatch, deleteWidget,
     return (
         <div className="form-control">
             <div className="row">
-                <h3 hidden={previewMode} className="col-7">
+                <h3 hidden={previewMode} className="col-8">
                     {widget.displayOrder}. {widget.widgetType} widget
                 </h3>
                 <button className="btn btn-success" hidden={!previewMode}>
                     Edit
                 </button>
                 <div className="btn-group">
-                    {widget.displayOrder !== 1 && <button className="btn btn-warning"
+                    {widget.displayOrder !== 1 && <button className="btn btn-primary"
                                                           hidden={previewMode}
                                                           onClick={() => widgetUp(widget.displayOrder)}>
                         <i className="fa fa-arrow-up"></i>
                     </button>}
-                    {widget.displayOrder !== widgetLength && <button className="btn btn-warning"
+                    {widget.displayOrder !== widgetLength && <button className="btn btn-primary"
                                                                      hidden={previewMode}
                                                                      onClick={() => widgetDown(widget.displayOrder)}>
                         <i className="fa fa-arrow-down"></i>
                     </button>}
-                    {/*<button hidden={previewMode} className="btn btn-warning"*/}
-                    {/*onClick={() => widgetUp(widget.displayOrder)}>*/}
-                    {/*<i className="fa fa-arrow-up"></i>*/}
-                    {/*</button>*/}
-                    {/*<button  hidden={previewMode} className="btn btn-warning"*/}
-                    {/*onClick={() => widgetDown(widget.displayOrder)}>*/}
-                    {/*<i className="fa fa-arrow-down"></i>*/}
-                    {/*</button>*/}
                     <select hidden={previewMode}
                             value={widget.widgetType}
                             onChange={() => selectWidgetType(widget.displayOrder, selectElement.value)}

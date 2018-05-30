@@ -1,9 +1,6 @@
 import * as constants from "../constants/WidgetConstants";
 
 const WidgetReducer = (state = {widgets: [], previewMode: false}, action) => {
-// const WidgetReducer = (state = {widgets: [], previewMode: false, courseId: '', moduleId: '' ,lessonId: ''},
-//                        action) => {
-//
         let newState;
 
         switch (action.type) {
