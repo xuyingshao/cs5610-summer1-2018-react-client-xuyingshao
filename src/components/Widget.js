@@ -33,12 +33,12 @@ const Widget = ({widget, previewMode, dispatch, deleteWidget,
                     Edit
                 </button>
                 <div className="btn-group">
-                    {widget.displayOrder !== 1 && <button className="btn btn-primary"
+                    {widget.displayOrder !== 1 && <button className="btn btn-outline-primary"
                                                           hidden={previewMode}
                                                           onClick={() => widgetUp(widget.displayOrder)}>
                         <i className="fa fa-arrow-up"></i>
                     </button>}
-                    {widget.displayOrder !== widgetLength && <button className="btn btn-primary"
+                    {widget.displayOrder !== widgetLength && <button className="btn btn-outline-primary"
                                                                      hidden={previewMode}
                                                                      onClick={() => widgetDown(widget.displayOrder)}>
                         <i className="fa fa-arrow-down"></i>

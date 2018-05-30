@@ -22,13 +22,13 @@ const Image = ({widget, previewMode, widgetNameChanged, imageUrlChanged}) => {
                        placeholder="Image URL"
                        ref={(node) => (srcElement = node)}
                        onChange={() => imageUrlChanged(widget.displayOrder, srcElement.value)}
-                       value={widget.src}/>
+                       value={widget.src === null ? "" : widget.src}/>
                 <br/>
                 <input className="form-control"
                        placeholder="Widget name"
                        ref={(node) => (nameElement = node)}
                        onChange={() => widgetNameChanged(widget.displayOrder, nameElement.value)}
-                       value={widget.name}/>
+                       value={widget.name === null ? "" : widget.name}/>
             </div>
             <h4 hidden={previewMode}>Preview</h4>
             <img src={widget.src}/>

@@ -25,13 +25,13 @@ const
                            placeholder="Heading Text"
                            onChange={() => widgetTextChanged(widget.displayOrder, textElement.value)}
                            ref={(node) => (textElement = node)}
-                           value={widget.text}/>
+                           value={widget.text === null ? "" : widget.text}/>
                     <br/>
                     <select className="form-control"
                             onChange={() => headingSizeChanged(widget.displayOrder, selectElement.value)}
                             value={widget.size}
-                            ref={(node) => (selectElement = node)}>
-                        {/*<option value="1" selcted hidden>Choose heading size</option>*/}
+                            ref={(node) => (selectElement = node)}
+                    value={widget.size === null ? "1" : widget.size}>
                         <option value="1">Heading 1</option>
                         <option value="2">Heading 2</option>
                         <option value="3">Heading 3</option>
@@ -41,7 +41,7 @@ const
                            placeholder="Widget name"
                            ref={(node) => (nameElement = node)}
                            onChange={() => widgetNameChanged(widget.displayOrder, nameElement.value)}
-                           value={widget.name}/>
+                           value={widget.name === null ? "" : widget.name}/>
                 </div>
                 <h4 hidden={previewMode}>Preview</h4>
                 {widget.size === '1' && <h1>{widget.text}</h1>}

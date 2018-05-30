@@ -22,13 +22,13 @@ const Paragraph = ({widget, previewMode, widgetTextChanged, widgetNameChanged}) 
               placeholder="Paragraph Text"
               ref={(node) => (textElement = node)}
               onChange={() => widgetTextChanged(widget.displayOrder, textElement.value)}
-              value={widget.text}/>
+              value={widget.text === null ? "" : widget.text}/>
                 <br/>
                 <input className="form-control"
                        placeholder="Widget name"
                        ref={(node) => (nameElement = node)}
                        onChange={() => widgetNameChanged(widget.displayOrder, nameElement.value)}
-                       value={widget.name}/>
+                       value={widget.name === null ? "" : widget.name}/>
             </div>
             <h4 hidden={previewMode}>Preview</h4>
             <div>{widget.text}</div>

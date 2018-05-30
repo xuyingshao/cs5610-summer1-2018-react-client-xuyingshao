@@ -24,19 +24,19 @@ const Link = ({widget, previewMode, widgetNameChanged, linkChanged, widgetTextCh
                        placeholder="Link URL"
                        ref={(node) => (linkElement = node)}
                        onChange={() => linkChanged(widget.displayOrder, linkElement.value)}
-                       value={widget.href}/>
+                       value={widget.href === null ? "" : widget.href}/>
                 <br/>
                 <input className="form-control container-fluid"
                        placeholder="Link Text"
                        ref={(node) => (linkTextElement = node)}
                        onChange={() => widgetTextChanged(widget.displayOrder, linkTextElement.value)}
-                       value={widget.text}/>
+                       value={widget.text === null ? "" : widget.text}/>
                 <br/>
                 <input className="form-control"
                        placeholder="Widget name"
                        ref={(node) => (nameElement = node)}
                        onChange={() => widgetNameChanged(widget.displayOrder, nameElement.value)}
-                       value={widget.name}/>
+                       value={widget.name === null ? "" : widget.name}/>
             </div>
             <h4 hidden={previewMode}>Preview</h4>
             <a href={widget.href}>{widget.text}</a>
