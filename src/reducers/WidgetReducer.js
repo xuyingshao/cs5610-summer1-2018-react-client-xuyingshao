@@ -59,7 +59,7 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action) => {
                 });
                 return state;
             case constants.SAVE_ALL_WIDGETS_FOR_LESSON:
-                fetch(LESSON_API_URL + action.lessonId + "/widget/save", {
+                fetch(LESSON_API_URL + '/' + action.lessonId + "/widget/save", {
                     method: 'post',
                     body: JSON.stringify(state.widgets),
                     headers: {

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83c7fa83-9d9f-4318-86b3-1febd45315fd" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/actions/WidgetActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/WidgetActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/WidgetReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/WidgetReducer.js" afterDir="false" />
-    </list>
+    <list default="true" id="83c7fa83-9d9f-4318-86b3-1febd45315fd" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -41,10 +38,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WidgetListContainer.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WidgetListContainer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/WidgetListContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-398">
+            <state relative-caret-position="612">
               <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
@@ -54,7 +51,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WidgetActions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WidgetActions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/WidgetActions.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1792">
@@ -305,12 +302,12 @@
       <workItem from="1527482586216" duration="42074000" />
       <workItem from="1527640153474" duration="3445000" />
       <workItem from="1527648243264" duration="255000" />
-      <workItem from="1527649952029" duration="6151000" />
+      <workItem from="1527649952029" duration="6382000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="217759000" />
+    <option name="totallyTimeSpent" value="217990000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="6" />
@@ -627,17 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/WidgetListContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-            <marker date="1527656273905" expanded="true" signature="3084:3175" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -677,6 +663,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1792">
           <caret line="2" selection-start-line="2" selection-end-line="6" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/WidgetListContainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+            <marker date="1527656273905" expanded="true" signature="3084:3175" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
