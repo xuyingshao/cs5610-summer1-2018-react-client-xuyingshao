@@ -2,12 +2,15 @@ import React from 'react';
 import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
-import WidgetApp from "./WidgetApp";
+import WidgetListContainer from "./WidgetListContainer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 import WidgetReducer from "../reducers/WidgetReducer";
 import ModuleEditor from "./ModuleEditor";
 import {Route} from "react-router-dom";
+
+
+let widgetStore = createStore(WidgetReducer);
 
 export default class LessonEditor
     extends React.Component {
@@ -15,9 +18,9 @@ export default class LessonEditor
         super(props);
 
         this.state = {
-            courseId: '',
-            moduleId: '',
-            lessonId: '',
+            courseId: this.props.match.params.courseId,
+            moduleId: this.props.match.params.moduleId,
+            lessonId: this.props.match.params.lessonId
         };
 
         this.selectCourse = this.selectCourse.bind(this);
@@ -29,7 +32,7 @@ export default class LessonEditor
         this.setState({courseId: courseId});
     }
 
-    selectModule(moduleId, moduleTitle) {
+    selectModule(moduleId) {
         this.setState({moduleId: moduleId});
     }
 
@@ -38,9 +41,9 @@ export default class LessonEditor
     }
 
     componentDidMount() {
-        this.selectCourse(this.props.match.params.courseId);
-        this.selectModule(this.props.match.params.moduleId);
-        this.selectLesson(this.props.match.params.lessonId);
+        // this.selectCourse(this.props.match.params.courseId);
+        // this.selectModule(this.props.match.params.moduleId);
+        // this.selectLesson(this.props.match.params.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -50,13 +53,15 @@ export default class LessonEditor
     }
 
     render() {
-        let widgetStore = createStore(WidgetReducer);
+        console.log('in lesson editor');
+        console.log(this.state.lessonId);
 
         return (
             <Provider store={widgetStore}>
-                <WidgetApp courseId={this.state.courseId}
+                <WidgetListContainer courseId={this.state.courseId}
                            moduleId={this.state.moduleId}
-                           lessonId={this.state.lessonId}/>
+                           lessonId={this.state.lessonId}
+                           previewMode={false}/>
             </Provider>
         );
     };

@@ -1,8 +1,9 @@
 import * as constants from "../constants/WidgetConstants";
 
-let idAutoIncrement = 3;
-
-const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
+const WidgetReducer = (state = {widgets: [], previewMode: false}, action) => {
+// const WidgetReducer = (state = {widgets: [], previewMode: false, courseId: '', moduleId: '' ,lessonId: ''},
+//                        action) => {
+//
         let newState;
 
         switch (action.type) {
@@ -22,27 +23,26 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
                     return newState;
                 }
             case constants.ADD_WIDGET:
+                // state.widgets = state.widgets.map((widget) => {
+                //     widget.previewMode = true;
+                //     return Object.assign({}, widget);
+                // })
                 return {
                     widgets: [
                         ...state.widgets,
                         {displayOrder: ++state.widgets.length, widgetType: 'Heading'}
                     ]
                 };
+
             case constants.FIND_ALL_WIDGETS:
                 // newState = Object.assign({}, state);
                 // newState.widgets = action.widgets;
                 // newState.previewMode = action.previewMode;
                 // return newState;
-
                 return {
                     widgets: action.widgets
                 }
-
-                // return {
-                //     widgets: action.widgets.sort((a, b) => (a.displayOrder - b.displayOrder))
-                // }
             case constants.FIND_ALL_WIDGETS_FOR_LESSON:
-                alert('find all widgets for lesson');
                 return {
                     widgets: action.widgets
                 }
@@ -55,8 +55,16 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
                     }
                 });
                 return state;
-            // case constants.SAVE_ALL_WIDGETS_FOR_LESSON:
-
+            case constants.SAVE_ALL_WIDGETS_FOR_LESSON:
+                // alert(action.lessonId);
+                fetch("http://localhost:8080/api/lesson/" + action.lessonId + "/widget/save", {
+                    method: 'post',
+                    body: JSON.stringify(state.widgets),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                });
+                return state;
             case constants.SELECT_WIDGET_TYPE:
                 newState = {
                     widgets: state.widgets.filter((widget) => {
@@ -79,7 +87,6 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
             case constants.PREVIEW:
                 newState = Object.assign({}, state);
                 newState.previewMode = !state.previewMode;
-                // console.log(newState.previewMode);
                 return newState;
             case constants.CHANGE_LIST_TYPE:
                 return {
@@ -160,10 +167,8 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
                         })
                     }
                 }
-                // console.log(newState);
                 return newState;
             case constants.WIDGET_DOWN:
-                console.log('widget to move ' + action.displayOrder);
                 if (action.displayOrder === state.widgets.length) {
                     newState = state;
                 }
@@ -187,13 +192,11 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action,) => {
                             return Object.assign({}, widget);
                         })
                     }
-                    // console.log(newState);
                     return newState;
                 }
             default:
                 return state;
         }
-    }
-;
+    };
 
 export default WidgetReducer;

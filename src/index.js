@@ -7,7 +7,7 @@ import './style.css';
 import WidgetReducer from "./reducers/WidgetReducer";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-import WidgetApp from "./containers/WidgetApp";
+import WidgetApp from "./containers/WidgetListContainer";
 
 ReactDOM.render (
     <CourseManager/>,

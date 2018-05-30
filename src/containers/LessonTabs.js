@@ -112,6 +112,7 @@ export default class LessonTabs
     }
 
     render() {
+        // console.log(this.props.moduleId);
         return (
             <div>
                 <h3>&nbsp;&nbsp;&nbsp;{this.props.module.title}</h3>

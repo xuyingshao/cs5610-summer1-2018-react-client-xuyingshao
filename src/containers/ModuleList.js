@@ -104,6 +104,7 @@ export default class ModuleList
     }
 
     render() {
+        // console.log(this.props.courseId);
         return (
             <div className="bg-light">
                 <h3 className="text-center">{this.state.currentCourse.title}</h3>

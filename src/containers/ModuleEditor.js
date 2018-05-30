@@ -12,8 +12,8 @@ export default class ModuleEditor
         super(props);
 
         this.state = {
-            courseId: '',
-            moduleId: '',
+            courseId: this.props.match.params.courseId,
+            moduleId: this.props.match.params.moduleId,
             currentModule: ''
         };
 
@@ -33,8 +33,8 @@ export default class ModuleEditor
     }
 
     componentDidMount() {
-        this.selectCourse(this.props.match.params.courseId);
-        this.selectModule(this.props.match.params.moduleId);
+        // this.selectCourse(this.props.match.params.courseId);
+        // this.selectModule(this.props.match.params.moduleId);
         this.findModuleById(this.props.match.params.moduleId);
     }
 
@@ -52,6 +52,7 @@ export default class ModuleEditor
     }
 
     render() {
+        // console.log(this.state);
         return (
             <div>
                 <LessonTabs courseId={this.state.courseId}

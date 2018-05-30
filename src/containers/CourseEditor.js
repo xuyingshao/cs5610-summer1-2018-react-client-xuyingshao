@@ -13,7 +13,7 @@ export default class CourseEditor
         super(props);
 
         this.state = {
-            courseId: '',
+            courseId: this.props.match.params.courseId,
             course: '',
             inputValue: '',
             newCourse: ''
@@ -32,7 +32,7 @@ export default class CourseEditor
     }
 
     componentDidMount() {
-        this.selectCourse(this.props.match.params.courseId);
+        // this.selectCourse(this.props.match.params.courseId);
         this.findCourseById(this.props.match.params.courseId);
     }
 
@@ -73,6 +73,7 @@ export default class CourseEditor
     }
 
     render() {
+        // console.log(this.state);
         return (
             <div>
                 <div>

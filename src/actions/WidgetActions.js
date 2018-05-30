@@ -1,20 +1,21 @@
 import * as constants from "../constants/WidgetConstants";
 
+const WIDGET_API_URL = "http://localhost:8080/api/widget";
 const LESSON_API_URL = 'http://localhost:8080/api/lesson';
 
 export const findAllWidgetsForLesson = (dispatch, lessonId) => {
-        fetch(LESSON_API_URL + '/' + lessonId)
-            .then((response) => (response.json))
-            .then((widgets) => (
-                dispatch({
-                    type: constants.FIND_ALL_WIDGETS_FOR_LESSON,
-                    widgets: widgets
-                })
-            ))
+    fetch(LESSON_API_URL + '/' + lessonId + '/widget')
+        .then((response) => (response.json()))
+        .then((widgets) => (
+            dispatch({
+                type: constants.FIND_ALL_WIDGETS_FOR_LESSON,
+                widgets: widgets,
+            })
+        ))
 };
 
 export const findAllWidgets = (dispatch) => (
-    fetch('http://localhost:8080/api/widget')
+    fetch(WIDGET_API_URL)
         .then((response) => (response.json()))
         .then((widgets) => (
             dispatch({
@@ -114,9 +115,10 @@ export const widgetTextChanged = (dispatch, widgetId, text) => {
     });
 };
 
-export const saveAllWidgetsForLesson = (dispatch) => {
+export const saveAllWidgetsForLesson = (dispatch, lessonId) => {
     dispatch({
         type: constants.SAVE_ALL_WIDGETS_FOR_LESSON,
+        lessonId: lessonId
     })
 };
 
@@ -134,5 +136,3 @@ export const widgetDown = (dispatch, widgetId) => {
         displayOrder: widgetId
     });
 };
-
-
