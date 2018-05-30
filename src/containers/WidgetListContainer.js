@@ -21,8 +21,6 @@ class WidgetList extends React.Component {
 
     componentWillReceiveProps(newProps) {
         if (newProps.lessonId !== this.props.lessonId) {
-            console.log('in widget list');
-            console.log(newProps.lessonId);
             this.props.findAllWidgetsForLesson(newProps.lessonId);
         }
     }
