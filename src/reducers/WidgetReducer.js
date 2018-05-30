@@ -1,5 +1,11 @@
 import * as constants from "../constants/WidgetConstants";
 
+// const WIDGET_API_URL = "http://localhost:8080/api/widget";
+// const LESSON_API_URL = 'http://localhost:8080/api/lesson';
+
+const WIDGET_API_URL = 'https://course-manager-jeanne.herokuapp.com/api/widget';
+const LESSON_API_URL = 'https://course-manager-jeanne.herokuapp.com/api/lesson';
+
 const WidgetReducer = (state = {widgets: [], previewMode: false}, action) => {
         let newState;
 
@@ -44,7 +50,7 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action) => {
                     widgets: action.widgets
                 }
             case constants.SAVE:
-                fetch("http://localhost:8080/api/widget/save", {
+                fetch(WIDGET_API_URL + '/save', {
                     method: 'post',
                     body: JSON.stringify(state.widgets),
                     headers: {
@@ -53,8 +59,7 @@ const WidgetReducer = (state = {widgets: [], previewMode: false}, action) => {
                 });
                 return state;
             case constants.SAVE_ALL_WIDGETS_FOR_LESSON:
-                // alert(action.lessonId);
-                fetch("http://localhost:8080/api/lesson/" + action.lessonId + "/widget/save", {
+                fetch(LESSON_API_URL + action.lessonId + "/widget/save", {
                     method: 'post',
                     body: JSON.stringify(state.widgets),
                     headers: {

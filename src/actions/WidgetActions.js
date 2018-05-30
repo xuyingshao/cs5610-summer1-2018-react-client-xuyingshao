@@ -1,7 +1,10 @@
 import * as constants from "../constants/WidgetConstants";
 
-const WIDGET_API_URL = "http://localhost:8080/api/widget";
-const LESSON_API_URL = 'http://localhost:8080/api/lesson';
+// const WIDGET_API_URL = "http://localhost:8080/api/widget";
+// const LESSON_API_URL = 'http://localhost:8080/api/lesson';
+
+const WIDGET_API_URL = 'https://course-manager-jeanne.herokuapp.com/api/widget';
+const LESSON_API_URL = 'https://course-manager-jeanne.herokuapp.com/api/lesson';
 
 export const findAllWidgetsForLesson = (dispatch, lessonId) => {
     fetch(LESSON_API_URL + '/' + lessonId + '/widget')
