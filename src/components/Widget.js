@@ -34,25 +34,27 @@ const Widget = ({widget, previewMode, dispatch, deleteWidget,
                 </button>
                 <div className="btn-group">
                     {widget.displayOrder !== 1 && <button className="btn btn-warning"
-                    onClick={() => widgetUp(widget.displayOrder)}>
-                    <i className="fa fa-arrow-up"></i>
+                                                          hidden={previewMode}
+                                                          onClick={() => widgetUp(widget.displayOrder)}>
+                        <i className="fa fa-arrow-up"></i>
                     </button>}
                     {widget.displayOrder !== widgetLength && <button className="btn btn-warning"
-                    onClick={() => widgetDown(widget.displayOrder)}>
-                    <i className="fa fa-arrow-down"></i>
+                                                                     hidden={previewMode}
+                                                                     onClick={() => widgetDown(widget.displayOrder)}>
+                        <i className="fa fa-arrow-down"></i>
                     </button>}
                     {/*<button hidden={previewMode} className="btn btn-warning"*/}
-                            {/*onClick={() => widgetUp(widget.displayOrder)}>*/}
-                        {/*<i className="fa fa-arrow-up"></i>*/}
+                    {/*onClick={() => widgetUp(widget.displayOrder)}>*/}
+                    {/*<i className="fa fa-arrow-up"></i>*/}
                     {/*</button>*/}
                     {/*<button  hidden={previewMode} className="btn btn-warning"*/}
-                            {/*onClick={() => widgetDown(widget.displayOrder)}>*/}
-                        {/*<i className="fa fa-arrow-down"></i>*/}
+                    {/*onClick={() => widgetDown(widget.displayOrder)}>*/}
+                    {/*<i className="fa fa-arrow-down"></i>*/}
                     {/*</button>*/}
                     <select hidden={previewMode}
-                        value={widget.widgetType}
-                        onChange={() => selectWidgetType(widget.displayOrder, selectElement.value)}
-                        ref={(node) => (selectElement = node)}>
+                            value={widget.widgetType}
+                            onChange={() => selectWidgetType(widget.displayOrder, selectElement.value)}
+                            ref={(node) => (selectElement = node)}>
                         <option>Heading</option>
                         <option>Paragraph</option>
                         <option>List</option>

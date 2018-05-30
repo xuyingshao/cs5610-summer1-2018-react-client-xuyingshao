@@ -52,7 +52,8 @@ export default class ModuleEditor
     }
 
     render() {
-        // console.log(this.state);
+        // console.log('in module editor ' + this.state.moduleId);
+
         return (
             <div>
                 <LessonTabs courseId={this.state.courseId}

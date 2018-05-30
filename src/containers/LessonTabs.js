@@ -25,6 +25,8 @@ export default class LessonTabs
             }
         };
 
+        // console.log('in lessontabs constructor' + this.state.moduleId);
+
         this.titleChanged = this.titleChanged.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
@@ -40,6 +42,9 @@ export default class LessonTabs
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
+
+        // console.log('in lessontabs newProps' + this.state.moduleId);
+
         this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
@@ -112,7 +117,8 @@ export default class LessonTabs
     }
 
     render() {
-        // console.log(this.props.moduleId);
+        // console.log('in lessontabs render ' + this.props.moduleId);
+
         return (
             <div>
                 <h3>&nbsp;&nbsp;&nbsp;{this.props.module.title}</h3>

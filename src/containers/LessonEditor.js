@@ -53,8 +53,8 @@ export default class LessonEditor
     }
 
     render() {
-        console.log('in lesson editor');
-        console.log(this.state.lessonId);
+        // console.log('in lesson editor');
+        // console.log(this.state.lessonId);
 
         return (
             <Provider store={widgetStore}>

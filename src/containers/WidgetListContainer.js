@@ -11,23 +11,28 @@ class WidgetList extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('in widget list');
-        console.log(this.props.lessonId);
+        // console.log('in widget list');
+        // console.log(this.props.lessonId);
         this.props.findAllWidgetsForLesson(this.props.lessonId);
     }
 
-    // ComponentDidMount() {
+    // componentDidMount() {
     //     console.log(this.props.lessonId);
     //     this.props.findAllWidgetsForLesson(this.props.lessonId);
     // }
 
-    ComponentWillReceiveNewProps(newProps) {
-        console.log('in widget list');
-        console.log(newProps);
-        this.props.findAllWidgetsForLesson(newProps.lessonId);
+    componentWillReceiveProps(newProps) {
+        if (newProps.lessonId !== this.props.lessonId) {
+            console.log('in widget list');
+            console.log(newProps.lessonId);
+            this.props.findAllWidgetsForLesson(newProps.lessonId);
+        }
     }
 
     render() {
+        // console.log('in widget list render');
+        // console.log(this.props.lessonId);
+
         return (
             <div className="col-11">
                 <br/>
@@ -65,7 +70,7 @@ class WidgetList extends React.Component {
 }
 
 const stateToPropsMapper = (state, ownProps) => {
-    return {
+    return  {
         widgets: state.widgets,
         previewMode: state.previewMode,
         courseId: ownProps.courseId,
